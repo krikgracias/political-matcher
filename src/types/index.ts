@@ -12,6 +12,7 @@ export interface Candidate {
   name: string;
   district: string;
   position: string;
+  term?: string;
   background: string;
   positions: any;
 }
