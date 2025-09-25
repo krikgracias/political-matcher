@@ -5,8 +5,12 @@
       "dest": "/?state=$1&county=$2&office=$3"
     },
     {
+      "src": "/elections/([^/]+)/([^/]+)/ballot-measures-([^/]+)",
+      "dest": "/?state=$1&county=$2&office=ballot-measures&year=$3"
+    },
+    {
       "src": "/elections",
-      "dest": "/elections-index.html"
+      "dest": "/elections-index"
     },
     {
       "src": "/(.*)",

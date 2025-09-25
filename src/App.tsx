@@ -18,7 +18,18 @@ function App() {
 
   const loadElectionConfig = async (state: string, county: string, office: string): Promise<void> => {
     try {
-      const configModule = await import(`./data/elections/${state}-${county}-${office}.js`);
+      // Handle special case for ballot measures with year
+      const urlParams = new URLSearchParams(window.location.search);
+      const year = urlParams.get('year');
+      
+      let configPath;
+      if (office === 'ballot-measures' && year) {
+        configPath = `./data/elections/${state}-${county}-ballot-measures-${year}.js`;
+      } else {
+        configPath = `./data/elections/${state}-${county}-${office}.js`;
+      }
+      
+      const configModule = await import(configPath);
       setElectionConfig(configModule.ELECTION_CONFIG);
       setLoading(false);
     } catch (err) {
@@ -27,15 +38,7 @@ function App() {
     }
   };
 
-  if (loading) {
-    return (
-      <div style={{padding: '40px', textAlign: 'center'}}>
-        <h2>Loading election data...</h2>
-      </div>
-    );
-  }
-
-  if (error) {
+if (error) {
     return (
       <div style={{padding: '40px', textAlign: 'center'}}>
         <h2>Election Not Available</h2>
@@ -43,11 +46,13 @@ function App() {
         <p>Available elections:</p>
         <ul style={{textAlign: 'left', display: 'inline-block'}}>
           <li><a href="/?state=florida&county=hernando&office=school-board">Hernando County School Board</a></li>
+          <li><a href="/?state=florida&county=hernando&office=county-commission">Hernando County Commission</a></li>
+          <li><a href="/?state=florida&county=hernando&office=city-council">Brooksville City Council</a></li>
+          <li><a href="/?state=florida&county=hernando&office=ballot-measures&year=2026">2026 Ballot Measures</a></li>
         </ul>
       </div>
     );
   }
-
   return <ElectionMatcher config={electionConfig!} />;
 }
 
