@@ -1,0 +1,16 @@
+{
+  "routes": [
+    {
+      "src": "/elections/([^/]+)/([^/]+)/([^/]+)",
+      "dest": "/?state=$1&county=$2&office=$3"
+    },
+    {
+      "src": "/elections",
+      "dest": "/elections-index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
