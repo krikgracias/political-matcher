@@ -2,7 +2,7 @@ export interface Question {
   id: string;
   category: string;
   text: string;
-  options: { value: string; label: string }[];
+  options: any[];
   order: number;
   active: boolean;
 }
@@ -13,7 +13,7 @@ export interface Candidate {
   district: string;
   position: string;
   background: string;
-  positions: { [key: string]: string };
+  positions: any;
 }
 
 export interface ElectionConfig {
