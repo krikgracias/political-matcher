@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react';
 import ElectionMatcher from './components/ElectionMatcher.jsx';
+import type { ElectionConfig } from './types';
 
 function App() {
-  const [electionConfig, setElectionConfig] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [electionConfig, setElectionConfig] = useState<ElectionConfig | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Get URL parameters
     const urlParams = new URLSearchParams(window.location.search);
-    const state = urlParams.get('state') || 'florida';
-    const county = urlParams.get('county') || 'hernando';
-    const office = urlParams.get('office') || 'school-board';
+    const state: string = urlParams.get('state') || 'florida';
+    const county: string = urlParams.get('county') || 'hernando';
+    const office: string = urlParams.get('office') || 'school-board';
     
     loadElectionConfig(state, county, office);
   }, []);
 
-  const loadElectionConfig = async (state, county, office) => {
+  const loadElectionConfig = async (state: string, county: string, office: string): Promise<void> => {
     try {
       const configModule = await import(`./data/elections/${state}-${county}-${office}.js`);
       setElectionConfig(configModule.ELECTION_CONFIG);
@@ -48,7 +48,7 @@ function App() {
     );
   }
 
-  return <ElectionMatcher config={electionConfig} />;
+  return <ElectionMatcher config={electionConfig!} />;
 }
 
 export default App;
