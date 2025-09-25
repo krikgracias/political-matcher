@@ -9,10 +9,6 @@
       "dest": "/?state=$1&county=$2&office=ballot-measures&year=$3"
     },
     {
-      "src": "/elections",
-      "dest": "/elections-index"
-    },
-    {
       "src": "/(.*)",
       "dest": "/$1"
     }
