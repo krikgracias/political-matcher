@@ -14,7 +14,12 @@ export interface Candidate {
   position: string;
   term?: string;
   background: string;
+  photo?: string;
+  website?: string;
+  email?: string;
   positions: any;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface ElectionConfig {
