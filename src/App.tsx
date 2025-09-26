@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import ElectionMatcher from './components/ElectionMatcher.jsx';
 import ElectionSelector from './components/ElectionSelector.jsx';
 import type { ElectionConfig } from './types';
+import { ELECTION_REGISTRY } from './data/electionRegistry.js';
 
 function App() {
   const [electionConfig, setElectionConfig] = useState<ElectionConfig | null>(null);
@@ -22,35 +23,37 @@ function App() {
     }
   }, []);
 
-  const loadElectionConfig = async (state: string, county: string, office: string): Promise<void> => {
+// In loadElectionConfig function:
+
+const loadElectionConfig = async (state: string, county: string, office: string): Promise<void> => {
     setLoading(true);
     try {
       const urlParams = new URLSearchParams(window.location.search);
       const year = urlParams.get('year');
       
-      let configPath;
+      let configKey;
       if (office === 'ballot-measures' && year) {
-        configPath = `./data/elections/${state}-${county}-ballot-measures-${year}.js`;
+        configKey = `${state}-${county}-ballot-measures-${year}`;
       } else {
-        configPath = `./data/elections/${state}-${county}-${office}.js`;
+        configKey = `${state}-${county}-${office}`;
       }
       
-      console.log('Trying to load:', configPath); // Debug line
-
-      const configModule = await import(configPath);
-      console.log('Successfully loaded config:', configModule.ELECTION_CONFIG.title); // Debug line
-
-      setElectionConfig(configModule.ELECTION_CONFIG);
+      console.log('Looking for election config key:', configKey);
+      
+      const config = ELECTION_REGISTRY[configKey];
+      if (!config) {
+        throw new Error(`Election config not found: ${configKey}`);
+      }
+      
+      setElectionConfig(config);
       setLoading(false);
       setError(null);
     } catch (err) {
-      console.error('Failed to load election config:', err); // Debug line
-
+      console.error('Failed to load election config:', err);
       setError(`Election not found: ${state}-${county}-${office}`);
       setLoading(false);
     }
   };
-
   const handleElectionSelect = () => {
     // Re-read URL parameters and load election
     const urlParams = new URLSearchParams(window.location.search);
