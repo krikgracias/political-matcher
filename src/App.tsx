@@ -35,11 +35,17 @@ function App() {
         configPath = `./data/elections/${state}-${county}-${office}.js`;
       }
       
+      console.log('Trying to load:', configPath); // Debug line
+
       const configModule = await import(configPath);
+      console.log('Successfully loaded config:', configModule.ELECTION_CONFIG.title); // Debug line
+
       setElectionConfig(configModule.ELECTION_CONFIG);
       setLoading(false);
       setError(null);
     } catch (err) {
+      console.error('Failed to load election config:', err); // Debug line
+
       setError(`Election not found: ${state}-${county}-${office}`);
       setLoading(false);
     }
