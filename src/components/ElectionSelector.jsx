@@ -11,7 +11,7 @@ const AVAILABLE_ELECTIONS = [
         offices: [
           { office: 'school-board', name: 'School Board', date: '2026-11-03' },
           { office: 'county-commission', name: 'County Commission', date: '2026-11-03' },
-          { office: 'city-council', name: 'City Council (Brooksville)', date: '2025-11-05' },
+          { office: 'city-council', name: 'City Council (Brooksville)', date: '2025-11-05', county: 'brooksville' },
           { office: 'ballot-measures', name: '2026 Ballot Measures', date: '2026-11-03', year: '2026' }
         ]
       }

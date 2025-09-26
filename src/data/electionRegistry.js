@@ -6,6 +6,6 @@ import { ELECTION_CONFIG as BallotMeasures } from './elections/florida-hernando-
 export const ELECTION_REGISTRY = {
   'florida-hernando-school-board': SchoolBoard,
   'florida-hernando-county-commission': CountyCommission,
-  'florida-brooksville-city-council': CityCouncil,
+  'florida-hernando-city-council': CityCouncil,
   'florida-hernando-ballot-measures-2026': BallotMeasures
 };
