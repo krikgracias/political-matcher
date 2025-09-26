@@ -47,17 +47,65 @@ export const ELECTION_CONFIG = {
       active: true
     }
   ],
-  candidates: [
+candidates: [
     {
-      id: 'placeholder-council-1',
-      name: 'City Council Candidate',
-      district: 'At-Large',
-      position: 'candidate',
-      background: 'Candidate information will be updated as elections approach.',
+      id: 'christa-tanner',
+      name: 'Christa Tanner',
+      district: 'Mayor',
+      position: 'current',
+      background: 'Current Mayor of Brooksville, focused on historic preservation and downtown revitalization while maintaining small-town character.',
       positions: {
         'downtown-revitalization': 'historic-preservation',
+        'city-services': 'parks-recreation',
+        'business-development': 'selective-recruitment'
+      }
+    },
+    {
+      id: 'thomas-bronson',
+      name: 'Thomas Bronson',
+      district: 'Vice Mayor',
+      position: 'current',
+      background: 'Vice Mayor of Brooksville, experienced in community development and local government operations.',
+      positions: {
+        'downtown-revitalization': 'mixed-use',
         'city-services': 'infrastructure',
+        'business-development': 'infrastructure-support'
+      }
+    },
+    {
+      id: 'jw-mckethan',
+      name: 'J.W. McKethan',
+      district: 'Council Member',
+      position: 'current',
+      background: 'Newly elected Brooksville City Council member, committed to representing residents\' interests and responsible city development.',
+      positions: {
+        'downtown-revitalization': 'community-led',
+        'city-services': 'police-fire',
         'business-development': 'local-business'
+      }
+    },
+    {
+      id: 'louis-hallal',
+      name: 'Louis Hallal',
+      district: 'Council Member',
+      position: 'current',
+      background: 'New Brooksville City Council member focused on making decisions in the best interest of Brooksville residents.',
+      positions: {
+        'downtown-revitalization': 'historic-preservation',
+        'city-services': 'economic-development',
+        'business-development': 'tax-incentives'
+      }
+    },
+    {
+      id: 'betty-erhard',
+      name: 'Betty Erhard',
+      district: 'Council Member',
+      position: 'current',
+      background: 'Recently elected to Brooksville City Council, bringing fresh perspective to local government and community development.',
+      positions: {
+        'downtown-revitalization': 'mixed-use',
+        'city-services': 'parks-recreation',
+        'business-development': 'selective-recruitment'
       }
     }
   ]

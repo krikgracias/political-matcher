@@ -73,18 +73,46 @@ export const ELECTION_CONFIG = {
       active: true
     }
   ],
-  candidates: [
+candidates: [
     {
-      id: 'placeholder-commissioner-1',
-      name: 'Commissioner District 1',
+      id: 'elizabeth-narverud',
+      name: 'Elizabeth Narverud',
       district: 'District 1',
-      position: 'candidate',
-      background: 'Candidate information will be updated as 2026 election approaches.',
+      position: 'current',
+      background: 'Vice Chair of Hernando County Commission, experienced local government official focused on community development and infrastructure.',
       positions: {
         'growth-management': 'balanced-approach',
         'infrastructure-priority': 'roads-transportation',
         'environmental-protection': 'balanced-consideration',
         'tax-spending': 'moderate-taxes-services',
+        'public-safety': 'maintain-current'
+      }
+    },
+    {
+      id: 'brian-hawkins',
+      name: 'Brian Hawkins',
+      district: 'District 2',
+      position: 'current',
+      background: 'Hernando County Commissioner representing District 2, focused on constituent services and responsible growth management.',
+      positions: {
+        'growth-management': 'controlled-growth',
+        'infrastructure-priority': 'water-sewer',
+        'environmental-protection': 'balanced-consideration',
+        'tax-spending': 'efficient-spending',
+        'public-safety': 'increase-sheriff'
+      }
+    },
+    {
+      id: 'steve-champion',
+      name: 'Steve Champion',
+      district: 'District 5',
+      position: 'current',
+      background: 'Long-serving Hernando County Commissioner for District 5, advocate for fiscal responsibility and community development.',
+      positions: {
+        'growth-management': 'business-friendly',
+        'infrastructure-priority': 'roads-transportation',
+        'environmental-protection': 'state-federal-standards',
+        'tax-spending': 'low-taxes-minimal',
         'public-safety': 'maintain-current'
       }
     }
