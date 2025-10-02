@@ -1,4 +1,4 @@
-export const ELECTION_CONFIG = {
+export const ELECTION_CONFIG_SCHOOL_BOARD = {
   id: 'florida-citrus-school-board',
   state: 'florida',
   county: 'citrus',
