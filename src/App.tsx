@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import ElectionMatcher from './components/ElectionMatcher.jsx';
-import ElectionSelector from './components/ElectionSelector.jsx';
+import ElectionMatcher from './components/ElectionMatcher';
+import ElectionSelector from './components/ElectionSelector';
 import type { ElectionConfig } from './types';
 import { ELECTION_REGISTRY } from './data/electionRegistry.js';
+import BallotMeasuresPage from './pages/BallotMeasuresPage';
 
 function App() {
   const [electionConfig, setElectionConfig] = useState<ElectionConfig | null>(null);

@@ -27,6 +27,10 @@ import { ELECTION_CONFIG_COMMISSION as PascoCommission } from './elections/flori
 import { ELECTION_CONFIG_SCHOOL_BOARD as CitrusSchoolBoard } from './elections/florida-citrus-school-board.js';
 import { ELECTION_CONFIG_COMMISSION as CitrusCountyCommission } from './elections/florida-citrus-county-commission.js';
 
+// BALLOT MEASURES
+import { AMENDMENT_3_2024 } from './ballot-measures/florida-amendment-3-marijuana.js';
+import { HILLSBOROUGH_TRANSIT_TAX_2024 } from './ballot-measures/hillsborough-transit-tax.js';
+
 export const ELECTION_REGISTRY = {
   // STATE RACES (Multi-County)
   'florida-senate-district-11': Senate11,
@@ -55,5 +59,13 @@ export const ELECTION_REGISTRY = {
   
   // CITRUS COUNTY
   'florida-citrus-school-board': CitrusSchoolBoard,
-  'florida-citrus-county-commission': CitrusCountyCommission
+  'florida-citrus-county-commission': CitrusCountyCommission,
+
+  // Add to your ELECTION_REGISTRY
+'florida-hernando-ballot-measures-2026': AMENDMENT_3_2024,
+'florida-citrus-ballot-measures-2026': AMENDMENT_3_2024,
+'florida-hillsborough-ballot-measures-2026': HILLSBOROUGH_TRANSIT_TAX_2024,
+'florida-polk-ballot-measures-2026': AMENDMENT_3_2024,
+'florida-pinellas-ballot-measures-2026': AMENDMENT_3_2024,
+'florida-pasco-ballot-measures-2026': AMENDMENT_3_2024,
 };

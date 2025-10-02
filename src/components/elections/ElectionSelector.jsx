@@ -20,7 +20,8 @@ const AVAILABLE_ELECTIONS = [
         countyName: 'Citrus County',
         offices: [
           { office: 'school-board', name: 'School Board', date: '2026-08-18' },
-          { office: 'county-commission', name: 'County Commission', date: '2026-11-03' }
+          { office: 'county-commission', name: 'County Commission', date: '2026-11-03' },
+          { office: 'ballot-measures', name: '2026 Ballot Measures', date: '2026-11-03', year: '2026' }
         ]
       },
       {
@@ -28,7 +29,8 @@ const AVAILABLE_ELECTIONS = [
         countyName: 'Hillsborough County',
         offices: [
           { office: 'school-board', name: 'School Board', date: '2026-08-18' },
-          { office: 'county-commission', name: 'County Commission', date: '2026-11-03' }
+          { office: 'county-commission', name: 'County Commission', date: '2026-11-03' },
+          { office: 'ballot-measures', name: '2026 Ballot Measures', date: '2026-11-03', year: '2026' }
         ]
       },
       {
@@ -36,7 +38,8 @@ const AVAILABLE_ELECTIONS = [
         countyName: 'Polk County',
         offices: [
           { office: 'school-board', name: 'School Board', date: '2026-08-18' },
-          { office: 'county-commission', name: 'County Commission', date: '2026-11-03' }
+          { office: 'county-commission', name: 'County Commission', date: '2026-11-03' },
+          { office: 'ballot-measures', name: '2026 Ballot Measures', date: '2026-11-03', year: '2026' }
         ]
       },
       {
@@ -44,7 +47,8 @@ const AVAILABLE_ELECTIONS = [
         countyName: 'Pinellas County',
         offices: [
           { office: 'school-board', name: 'School Board', date: '2026-08-18' },
-          { office: 'county-commission', name: 'County Commission', date: '2026-11-03' }
+          { office: 'county-commission', name: 'County Commission', date: '2026-11-03' },
+          { office: 'ballot-measures', name: '2026 Ballot Measures', date: '2026-11-03', year: '2026' }
         ]
       },
       {
@@ -52,7 +56,8 @@ const AVAILABLE_ELECTIONS = [
         countyName: 'Pasco County',
         offices: [
           { office: 'school-board', name: 'School Board', date: '2026-08-18' },
-          { office: 'county-commission', name: 'County Commission', date: '2026-11-03' }
+          { office: 'county-commission', name: 'County Commission', date: '2026-11-03' },
+          { office: 'ballot-measures', name: '2026 Ballot Measures', date: '2026-11-03', year: '2026' }
         ]
       }
     ]
@@ -257,11 +262,11 @@ function ElectionSelector({ onElectionSelect }) {
           <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Available Elections:</h3>
           <ul style={{ color: '#666', lineHeight: '1.6' }}>
             <li><strong>Hernando County:</strong> School Board, County Commission, City Council, Ballot Measures</li>
-            <li><strong>Citrus County:</strong> School Board, County Commission</li>
-            <li><strong>Hillsborough County:</strong> School Board, County Commission</li>
-            <li><strong>Polk County:</strong> School Board, County Commission</li>
-            <li><strong>Pinellas County:</strong> School Board, County Commission</li>
-            <li><strong>Pasco County:</strong> School Board, County Commission</li>
+            <li><strong>Citrus County:</strong> School Board, County Commission, Ballot Measures</li>
+            <li><strong>Hillsborough County:</strong> School Board, County Commission, Ballot Measures</li>
+            <li><strong>Polk County:</strong> School Board, County Commission, Ballot Measures</li>
+            <li><strong>Pinellas County:</strong> School Board, County Commission, Ballot Measures</li>
+            <li><strong>Pasco County:</strong> School Board, County Commission, Ballot Measures</li>
           </ul>
           <p style={{ 
             color: '#666', 
