@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import ElectionMatcher from './components/ElectionMatcher.jsx';
-import ElectionSelector from './components/ElectionSelector.jsx';
+import ElectionMatcher from './components/elections/ElectionMatcher.jsx';
+import ElectionSelector from './components/elections/ElectionSelector.jsx';
 import type { ElectionConfig } from './types';
 import { ELECTION_REGISTRY } from './data/electionRegistry.js';
 import BallotMeasuresPage from './pages/BallotMeasuresPage';
