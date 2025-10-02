@@ -1,3 +1,4 @@
+//fixed file
 export const ELECTION_CONFIG_COMMISSION = {
   id: 'florida-pinellas-county-commission',
   state: 'florida',
