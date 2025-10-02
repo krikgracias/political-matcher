@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Questionnaire from './Questionnaire.jsx';
-import { calculateAllMatches } from '../utils/matching.js';
+import { calculateAllMatches } from '../../utils/matching.js';
 
 function ElectionMatcher({ config }) {
   const [showResults, setShowResults] = useState(false);
