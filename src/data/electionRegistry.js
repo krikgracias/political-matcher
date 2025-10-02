@@ -1,11 +1,59 @@
-import { ELECTION_CONFIG as SchoolBoard } from './elections/florida-hernando-school-board.js';
-import { ELECTION_CONFIG as CountyCommission } from './elections/florida-hernando-county-commission.js';
-import { ELECTION_CONFIG as CityCouncil } from './elections/florida-brooksville-city-council.js';
-import { ELECTION_CONFIG as BallotMeasures } from './elections/florida-hernando-ballot-measures-2026.js';
+// HERNANDO COUNTY
+import { ELECTION_CONFIG as HernandoSchoolBoard } from './elections/florida-hernando-school-board.js';
+import { ELECTION_CONFIG as HernandoCountyCommission } from './elections/florida-hernando-county-commission.js';
+import { ELECTION_CONFIG as BrooksvilleCityCouncil } from './elections/florida-brooksville-city-council.js';
+import { ELECTION_CONFIG as HernandoBallotMeasures } from './elections/florida-hernando-ballot-measures-2026.js';
+
+// STATE RACES
+import { ELECTION_CONFIG as Senate11 } from './elections/florida-senate-district-11.js';
+
+// PINELLAS COUNTY
+import { ELECTION_CONFIG_SCHOOL_BOARD as PinellasSchoolBoard } from './elections/florida-pinellas-school-board.js';
+import { ELECTION_CONFIG_COMMISSION as PinellasCountyCommission } from './elections/florida-pinellas-county-commission.js';
+
+// HILLSBOROUGH COUNTY
+import { ELECTION_CONFIG_SCHOOL_BOARD as HillsboroughSchoolBoard } from './elections/florida-hillsborough-school-board.js';
+import { ELECTION_CONFIG_COMMISSION as HillsboroughCountyCommission } from './elections/florida-hillsborough-county-commission.js';
+
+// POLK COUNTY
+import { ELECTION_CONFIG_SCHOOL_BOARD as PolkSchoolBoard } from './elections/florida-polk-school-board.js';
+import { ELECTION_CONFIG_COMMISSION as PolkCountyCommission } from './elections/florida-polk-county-commission.js';
+
+// PASCO COUNTY
+import { ELECTION_CONFIG_SCHOOL_BOARD as PascoSchoolBoard } from './elections/florida-pasco-school-board.js';
+import { ELECTION_CONFIG_COMMISSION as PascoCommission } from './elections/florida-pasco-county-commission.js';
+
+// CITRUS COUNTY
+import { ELECTION_CONFIG_SCHOOL_BOARD as CitrusSchoolBoard } from './elections/florida-citrus-school-board.js';
+import { ELECTION_CONFIG_COMMISSION as CitrusCountyCommission } from './elections/florida-citrus-county-commission.js';
 
 export const ELECTION_REGISTRY = {
-  'florida-hernando-school-board': SchoolBoard,
-  'florida-hernando-county-commission': CountyCommission,
-  'florida-hernando-city-council': CityCouncil,
-  'florida-hernando-ballot-measures-2026': BallotMeasures
+  // STATE RACES (Multi-County)
+  'florida-senate-district-11': Senate11,
+  
+  // HERNANDO COUNTY
+  'florida-hernando-school-board': HernandoSchoolBoard,
+  'florida-hernando-county-commission': HernandoCountyCommission,
+  'florida-hernando-city-council': BrooksvilleCityCouncil,
+  'florida-hernando-ballot-measures-2026': HernandoBallotMeasures,
+  
+  // PINELLAS COUNTY
+  'florida-pinellas-school-board': PinellasSchoolBoard,
+  'florida-pinellas-county-commission': PinellasCountyCommission,
+  
+  // HILLSBOROUGH COUNTY
+  'florida-hillsborough-school-board': HillsboroughSchoolBoard,
+  'florida-hillsborough-county-commission': HillsboroughCountyCommission,
+  
+  // POLK COUNTY
+  'florida-polk-school-board': PolkSchoolBoard,
+  'florida-polk-county-commission': PolkCountyCommission,
+  
+  // PASCO COUNTY
+  'florida-pasco-school-board': PascoSchoolBoard,
+  'florida-pasco-county-commission': PascoCommission,
+  
+  // CITRUS COUNTY
+  'florida-citrus-school-board': CitrusSchoolBoard,
+  'florida-citrus-county-commission': CitrusCountyCommission
 };
