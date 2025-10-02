@@ -153,32 +153,7 @@ export const ELECTION_CONFIG_COMMISSION = {
         'development-growth': 'strategic-planning',
         'st-pete-clearwater': 'issue-by-issue',
         'public-safety': 'regional-coordination',
-        'charter-amendments': 'measured-implementation',
-        'parks-recreation': 'improve-existing',
-        'economic-diversification': 'small-business'
-      }
-    },
-    {
-      id: 'rene-flowers',
-      name: 'Rene Flowers',
-      district: 'District 7',
-      position: 'current',
-      background: 'Elected 2020. Only Democrat on the seven-member commission. Represents single-member district. Provides diverse perspective on board dominated by Republicans.',
-      positions: {
-        'affordable-housing': 'aggressive-development',
-        'beach-tourism': 'local-priority',
-        'transportation': 'public-transit',
-        'climate-resilience': 'comprehensive-plan',
-        'development-growth': 'redevelopment-focus',
-        'st-pete-clearwater': 'strong-collaboration',
-        'public-safety': 'targeted-investments',
-        'charter-amendments': 'citizen-engagement',
-        'parks-recreation': 'acquire-more',
-        'economic-diversification': 'tech-innovation'
-      }
-    }
-  ]
-};amendments': 'embrace-reforms',
+        'charter-amendments': 'embrace-reforms',
         'parks-recreation': 'balanced-investment',
         'economic-diversification': 'diverse-sectors'
       }
@@ -273,4 +248,29 @@ export const ELECTION_CONFIG_COMMISSION = {
         'development-growth': 'strategic-planning',
         'st-pete-clearwater': 'issue-by-issue',
         'public-safety': 'targeted-investments',
-        'charter-
+        'charter-amendments': 'measured-implementation',
+        'parks-recreation': 'improve-existing',
+        'economic-diversification': 'small-business'
+      }
+    },
+    {
+      id: 'rene-flowers',
+      name: 'Rene Flowers',
+      district: 'District 7',
+      position: 'current',
+      background: 'Elected 2020. Only Democrat on the seven-member commission. Represents single-member district. Provides diverse perspective on board dominated by Republicans.',
+      positions: {
+        'affordable-housing': 'aggressive-development',
+        'beach-tourism': 'local-priority',
+        'transportation': 'public-transit',
+        'climate-resilience': 'comprehensive-plan',
+        'development-growth': 'redevelopment-focus',
+        'st-pete-clearwater': 'strong-collaboration',
+        'public-safety': 'targeted-investments',
+        'charter-amendments': 'citizen-engagement',
+        'parks-recreation': 'acquire-more',
+        'economic-diversification': 'tech-innovation'
+      }
+    }
+  ]
+};
