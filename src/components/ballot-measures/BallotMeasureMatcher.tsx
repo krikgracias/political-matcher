@@ -3,13 +3,12 @@
 import React, { useState } from 'react';
 import { CheckCircle, XCircle, AlertCircle, DollarSign, Scale, TrendingUp, FileText } from 'lucide-react';
 
-const measure = config;
-
 interface BallotMeasureMatcherProps {
   config: any;
 }
 
 const BallotMeasureMatcher = ({ config }: BallotMeasureMatcherProps) => {
+  const measure = config;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showResults, setShowResults] = useState(false);
