@@ -3,60 +3,20 @@
 import React, { useState } from 'react';
 import { CheckCircle, XCircle, AlertCircle, DollarSign, Scale, TrendingUp, FileText } from 'lucide-react';
 
-const sampleMeasure = {
-  id: 'florida-amendment-3-2024',
-  title: 'Adult Use of Marijuana',
-  shortTitle: 'Marijuana Legalization',
-  number: '3',
-  type: 'constitutional-amendment',
-  electionDate: '2024-11-05',
-  summary: 'Allows adults 21 and older to possess, purchase, and use marijuana for recreational purposes. Does not allow home cultivation.',
-  requirements: { threshold: 60, thresholdType: 'percentage' },
-  results: { passed: false, percentFor: 55.9, percentAgainst: 44.1, note: 'Failed to reach 60% threshold' },
-  fiscalImpact: {
-    summary: 'State gains estimated $195.6 million annually',
-    details: ['Sales tax revenue: ~$195.6M per year', 'Reduced law enforcement costs', 'Minimal regulatory costs']
-  },
-  supportersArguments: [
-    { category: 'personal-freedom', title: 'Personal Freedom', argument: 'Adults should have the right to make their own choices.', strength: 'high' },
-    { category: 'criminal-justice', title: 'Criminal Justice Reform', argument: 'Reduces unnecessary arrests.', strength: 'high' },
-    { category: 'tax-revenue', title: 'Tax Revenue', argument: 'Generates $200M annually for services.', strength: 'medium' }
-  ],
-  opponentsArguments: [
-    { category: 'corporate-monopoly', title: 'Corporate Monopoly', argument: 'Written by dispensaries for their benefit.', strength: 'high' },
-    { category: 'public-health', title: 'Public Health', argument: 'Could increase youth use and impaired driving.', strength: 'medium' }
-  ],
-  questions: [
-    {
-      id: 'main-position',
-      text: 'Should recreational marijuana be legal in Florida for adults 21+?',
-      options: [
-        { value: 'yes-strongly', label: 'YES - Strongly support' },
-        { value: 'yes-reservations', label: 'YES - Support with concerns' },
-        { value: 'no-reform', label: 'NO - But support reform' },
-        { value: 'no-strongly', label: 'NO - Oppose entirely' }
-      ]
-    },
-    {
-      id: 'corporate-control',
-      text: 'Does it concern you that dispensary companies wrote this?',
-      options: [
-        { value: 'major-concern', label: 'Major concern - dealbreaker' },
-        { value: 'minor-concern', label: 'Minor concern' },
-        { value: 'not-concerned', label: 'Not concerned' }
-      ]
-    }
-  ]
-};
+const measure = config;
 
-const BallotMeasureMatcher = () => {
+interface BallotMeasureMatcherProps {
+  config: any;
+}
+
+const BallotMeasureMatcher = ({ config }: BallotMeasureMatcherProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showResults, setShowResults] = useState(false);
 
   const handleAnswer = (questionId: string, value: string) => {
     setAnswers(prev => ({ ...prev, [questionId]: value }));
-    if (currentQuestion < sampleMeasure.questions.length - 1) {
+    if (currentQuestion < measure.questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setShowResults(true);
@@ -110,12 +70,12 @@ const BallotMeasureMatcher = () => {
             <Scale className="w-8 h-8 text-blue-600 mr-4 mt-1 flex-shrink-0" />
             <div className="flex-1">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Amendment {sampleMeasure.number}: {sampleMeasure.shortTitle}
+                Amendment {measure.number}: {measure.shortTitle}
               </h1>
-              <p className="text-gray-700 mb-3">{sampleMeasure.summary}</p>
+              <p className="text-gray-700 mb-3">{measure.summary}</p>
               <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                <span>📅 {new Date(sampleMeasure.electionDate).toLocaleDateString()}</span>
-                <span>📊 Requires {sampleMeasure.requirements.threshold}% to pass</span>
+                <span>📅 {new Date(measure.electionDate).toLocaleDateString()}</span>
+                <span>📊 Requires {measure.requirements.threshold}% to pass</span>
                 <span>🏛️ Constitutional Amendment</span>
               </div>
             </div>
@@ -143,7 +103,7 @@ const BallotMeasureMatcher = () => {
           </div>
         </div>
 
-        {sampleMeasure.results && (
+        {measure.results && (
           <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
             <h3 className="text-xl font-bold mb-4 flex items-center">
               <TrendingUp className="w-6 h-6 mr-2 text-blue-600" />
@@ -152,15 +112,15 @@ const BallotMeasureMatcher = () => {
             <div className="space-y-3">
               <div className="flex justify-between items-center p-3 bg-green-50 rounded">
                 <span className="font-medium">YES votes:</span>
-                <span className="text-green-700 font-bold text-xl">{sampleMeasure.results.percentFor}%</span>
+                <span className="text-green-700 font-bold text-xl">{measure.results.percentFor}%</span>
               </div>
               <div className="flex justify-between items-center p-3 bg-red-50 rounded">
                 <span className="font-medium">NO votes:</span>
-                <span className="text-red-700 font-bold text-xl">{sampleMeasure.results.percentAgainst}%</span>
+                <span className="text-red-700 font-bold text-xl">{measure.results.percentAgainst}%</span>
               </div>
               <div className="mt-4 p-4 bg-gray-100 rounded border-l-4 border-gray-500">
                 <p className="text-sm text-gray-800">
-                  <strong>Result:</strong> {sampleMeasure.results.passed ? '✓ PASSED' : '✗ FAILED'} - {sampleMeasure.results.note}
+                  <strong>Result:</strong> {measure.results.passed ? '✓ PASSED' : '✗ FAILED'} - {measure.results.note}
                 </p>
               </div>
             </div>
@@ -172,9 +132,9 @@ const BallotMeasureMatcher = () => {
             <DollarSign className="w-6 h-6 mr-2 text-green-600" />
             Fiscal Impact
           </h3>
-          <p className="text-gray-900 font-medium mb-4 text-lg">{sampleMeasure.fiscalImpact.summary}</p>
+          <p className="text-gray-900 font-medium mb-4 text-lg">{measure.fiscalImpact.summary}</p>
           <ul className="space-y-2">
-            {sampleMeasure.fiscalImpact.details.map((detail, idx) => (
+            {measure.fiscalImpact.details.map((detail, idx) => (
               <li key={idx} className="text-gray-700 flex items-start">
                 <span className="text-blue-500 mr-2 mt-1">•</span>
                 <span>{detail}</span>
@@ -189,7 +149,7 @@ const BallotMeasureMatcher = () => {
             Arguments in Favor
           </h3>
           <div className="space-y-4">
-            {sampleMeasure.supportersArguments.map((arg, idx) => (
+            {measure.supportersArguments.map((arg, idx) => (
               <div key={idx} className="border-l-4 border-green-400 pl-4 py-2">
                 <h4 className={`font-semibold mb-1 ${getStrengthColor(arg.strength)}`}>
                   {arg.title}
@@ -206,7 +166,7 @@ const BallotMeasureMatcher = () => {
             Arguments Against
           </h3>
           <div className="space-y-4">
-            {sampleMeasure.opponentsArguments.map((arg, idx) => (
+            {measure.opponentsArguments.map((arg, idx) => (
               <div key={idx} className="border-l-4 border-red-400 pl-4 py-2">
                 <h4 className={`font-semibold mb-1 ${getStrengthColor(arg.strength)}`}>
                   {arg.title}
@@ -223,7 +183,7 @@ const BallotMeasureMatcher = () => {
             Your Answers
           </h3>
           <div className="space-y-4">
-            {sampleMeasure.questions.map((q) => (
+            {measure.questions.map((q) => (
               <div key={q.id} className="pb-4 border-b border-gray-200 last:border-0">
                 <p className="font-medium text-gray-900 mb-2">{q.text}</p>
                 <p className="text-gray-600 bg-blue-50 px-3 py-2 rounded">
@@ -252,18 +212,18 @@ const BallotMeasureMatcher = () => {
     );
   }
 
-  const question = sampleMeasure.questions[currentQuestion];
-  const progress = ((currentQuestion + 1) / sampleMeasure.questions.length) * 100;
+  const question = measure.questions[currentQuestion];
+  const progress = ((currentQuestion + 1) / measure.questions.length) * 100;
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-gray-50 min-h-screen">
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-2xl font-bold text-gray-900">
-            Amendment {sampleMeasure.number}: {sampleMeasure.shortTitle}
+            Amendment {measure.number}: {measure.shortTitle}
           </h1>
           <span className="text-sm text-gray-600 bg-white px-3 py-1 rounded-full shadow">
-            Question {currentQuestion + 1} of {sampleMeasure.questions.length}
+            Question {currentQuestion + 1} of {measure.questions.length}
           </span>
         </div>
         
@@ -276,7 +236,7 @@ const BallotMeasureMatcher = () => {
       </div>
 
       <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-8 rounded">
-        <p className="text-gray-800">{sampleMeasure.summary}</p>
+        <p className="text-gray-800">{measure.summary}</p>
       </div>
 
       <div className="bg-white rounded-lg shadow-lg p-8 mb-6">
@@ -309,7 +269,7 @@ const BallotMeasureMatcher = () => {
           </button>
         )}
         <div className="ml-auto text-sm text-gray-500 bg-white px-3 py-1 rounded shadow">
-          {Object.keys(answers).length} of {sampleMeasure.questions.length} answered
+          {Object.keys(answers).length} of {measure.questions.length} answered
         </div>
       </div>
 
@@ -317,7 +277,7 @@ const BallotMeasureMatcher = () => {
         <div className="bg-white p-4 rounded-lg shadow">
           <div className="text-xs text-gray-600 mb-1">Election Date</div>
           <div className="font-semibold text-gray-900">
-            {new Date(sampleMeasure.electionDate).toLocaleDateString()}
+            {new Date(measure.electionDate).toLocaleDateString()}
           </div>
         </div>
         <div className="bg-white p-4 rounded-lg shadow">
@@ -327,7 +287,7 @@ const BallotMeasureMatcher = () => {
         <div className="bg-white p-4 rounded-lg shadow">
           <div className="text-xs text-gray-600 mb-1">Threshold</div>
           <div className="font-semibold text-gray-900">
-            {sampleMeasure.requirements.threshold}% required
+            {measure.requirements.threshold}% required
           </div>
         </div>
       </div>

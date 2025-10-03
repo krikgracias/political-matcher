@@ -4,6 +4,7 @@ import ElectionSelector from './components/elections/ElectionSelector.jsx';
 import type { ElectionConfig } from './types';
 import { ELECTION_REGISTRY } from './data/electionRegistry.js';
 import BallotMeasuresPage from './pages/BallotMeasuresPage';
+import BallotMeasureMatcher from './components/ballot-measures/BallotMeasureMatcher';
 
 function App() {
   const [electionConfig, setElectionConfig] = useState<ElectionConfig | null>(null);
@@ -114,31 +115,37 @@ const loadElectionConfig = async (state: string, county: string, office: string)
   }
 
   // Show election matcher with back button
-  return (
-    <div>
-      <div style={{
-        padding: '10px 20px',
-        backgroundColor: '#f8f9fa',
-        borderBottom: '1px solid #ddd'
-      }}>
-        <button
-          onClick={handleBackToLanding}
-          style={{
-            padding: '8px 16px',
-            backgroundColor: '#6c757d',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            fontSize: '14px'
-          }}
-        >
-          ← Back to Election Selection
-        </button>
-      </div>
-      <ElectionMatcher config={electionConfig!} />
+// Check if this is a ballot measure
+const isBallotMeasure = electionConfig?.office === 'ballot-measures';
+
+return (
+  <div>
+    <div style={{
+      padding: '10px 20px',
+      backgroundColor: '#f8f9fa',
+      borderBottom: '1px solid #ddd'
+    }}>
+      <button
+        onClick={handleBackToLanding}
+        style={{
+          padding: '8px 16px',
+          backgroundColor: '#6c757d',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          fontSize: '14px'
+        }}
+      >
+        ← Back to Election Selection
+      </button>
     </div>
-  );
-}
+    {isBallotMeasure ? (
+      <BallotMeasureMatcher config={electionConfig!} />
+    ) : (
+      <ElectionMatcher config={electionConfig!} />
+    )}
+  </div>
+);
 
 export default App;
