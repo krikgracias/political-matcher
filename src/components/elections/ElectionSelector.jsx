@@ -67,28 +67,30 @@ const AVAILABLE_ELECTIONS = [
 // Add this near the top after AVAILABLE_ELECTIONS
 const COUNTY_MEETING_LINKS = {
   hernando: {
-    commission: 'https://www.hernandocounty.us/departments/departments-a-c/bocc/agendas-minutes',
-    schoolBoard: 'https://www.hernandoschools.org/board'
+    commission: 'https://hernandocountyfl.legistar.com/Calendar.aspx',
+    schoolBoard: 'https://hernandoschools.legistar.com/Calendar.aspx'
   },
   citrus: {
-    commission: 'https://www.citrusbocc.com/departments/bocc/agendas-minutes',
-    schoolBoard: 'https://www.citrusschools.org/domain/52'
+    commission: 'https://citrusclerk.portal.civicclerk.com/',
+    schoolBoard: 'https://citrus-k12-fl.community.highbond.com/Portal/MeetingTypeList.aspx'
+    planning: 'https://www.citrusbocc.com/departments/administrator/strategic_planning.php'
   },
   hillsborough: {
-    commission: 'https://www.hillsboroughcounty.org/en/government/board-of-county-commissioners/meetings-and-agendas',
-    schoolBoard: 'https://www.sdhc.k12.fl.us/board/'
+    commission: 'https://hcfl.gov/events',
+    schoolBoard: 'https://www.hillsboroughschools.org/events?section_ids=493682&view=cal-month'
   },
   polk: {
     commission: 'https://www.polk-county.net/county-offices/board-of-county-commissioners/meetings-agendas',
-    schoolBoard: 'https://www.polkschoolsfl.com/boardmembers'
+    schoolBoard: 'https://go.boarddocs.com/fl/polk/Board.nsf/Public?open'
+    notices: 'https://polkcounty.column.us/search'
   },
   pinellas: {
     commission: 'https://pinellas.gov/government/elected-officials/board-of-county-commissioners/meetings/',
     schoolBoard: 'https://www.pcsb.org/domain/1337'
   },
   pasco: {
-    commission: 'https://www.pascocountyfl.net/219/Board-of-County-Commissioners',
-    schoolBoard: 'https://www.pasco.k12.fl.us/board/meetings/'
+    commission: 'https://www.pascocountyfl.gov/government/agendas_minutes.php',
+    schoolBoard: 'https://www.pcsb.org/Page/3924'
   }
 };
 
@@ -236,7 +238,14 @@ function ElectionSelector({ onElectionSelect }) {
               borderRadius: '6px',
               borderLeft: '4px solid #2196f3'
             }}>
-              <strong style={{ color: '#1976d2', fontSize: '16px' }}>📅 Meeting Information</strong>
+              <p style={{ 
+                margin: '0 0 10px 0', 
+                color: '#555',
+                fontSize: '14px' 
+              }}>
+                Looking for meeting agendas and schedules?
+              </p>
+              <strong style={{ color: '#1976d2', fontSize: '16px' }}>County Meeting Information:</strong>
               <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <a 
                   href={COUNTY_MEETING_LINKS[selectedCounty].commission} 
