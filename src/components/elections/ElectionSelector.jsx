@@ -76,7 +76,7 @@ const COUNTY_MEETING_LINKS = {
     planning: 'https://www.citrusbocc.com/departments/administrator/strategic_planning.php'
   },
   hillsborough: {
-    commission: 'https://hcfl.gov/events',
+    commission: 'https://hcfl.gov/events?refinementList%5BeventConnection.edges.node.calendar%5D%5B0%5D=Public%20Meetings&refinementList%5BeventConnection.edges.node.calendar%5D%5B1%5D=Commission%20Meetings&range%5B_start_date%5D=1759118400000%3A',
     schoolBoard: 'https://www.hillsboroughschools.org/events?section_ids=493682&view=cal-month'
   },
   polk: {
