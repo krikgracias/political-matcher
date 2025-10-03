@@ -72,7 +72,7 @@ const COUNTY_MEETING_LINKS = {
   },
   citrus: {
     commission: 'https://citrusclerk.portal.civicclerk.com/',
-    schoolBoard: 'https://citrus-k12-fl.community.highbond.com/Portal/MeetingTypeList.aspx'
+    schoolBoard: 'https://citrus-k12-fl.community.highbond.com/Portal/MeetingTypeList.aspx',
     planning: 'https://www.citrusbocc.com/departments/administrator/strategic_planning.php'
   },
   hillsborough: {
@@ -81,7 +81,7 @@ const COUNTY_MEETING_LINKS = {
   },
   polk: {
     commission: 'https://www.polk-county.net/county-offices/board-of-county-commissioners/meetings-agendas',
-    schoolBoard: 'https://go.boarddocs.com/fl/polk/Board.nsf/Public?open'
+    schoolBoard: 'https://go.boarddocs.com/fl/polk/Board.nsf/Public?open',
     notices: 'https://polkcounty.column.us/search'
   },
   pinellas: {
