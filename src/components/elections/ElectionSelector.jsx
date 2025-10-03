@@ -80,17 +80,17 @@ const COUNTY_MEETING_LINKS = {
     schoolBoard: 'https://www.hillsboroughschools.org/events?section_ids=493682&view=cal-month'
   },
   polk: {
-    commission: 'https://www.polk-county.net/county-offices/board-of-county-commissioners/meetings-agendas',
+    commission: 'https://polkcountyfl.legistar.com/Calendar.aspx',
     schoolBoard: 'https://go.boarddocs.com/fl/polk/Board.nsf/Public?open',
     notices: 'https://polkcounty.column.us/search'
   },
   pinellas: {
-    commission: 'https://pinellas.gov/government/elected-officials/board-of-county-commissioners/meetings/',
-    schoolBoard: 'https://www.pcsb.org/domain/1337'
+    commission: 'https://pinellas.gov/events/list/?tribe_eventcategory=2058',
+    schoolBoard: 'https://www.pcsb.org/Page/3924'
   },
   pasco: {
     commission: 'https://www.pascocountyfl.gov/government/agendas_minutes.php',
-    schoolBoard: 'https://www.pcsb.org/Page/3924'
+    schoolBoard: 'https://go.boarddocs.com/fl/pasco/Board.nsf/Public'
   }
 };
 
