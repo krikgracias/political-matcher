@@ -64,6 +64,35 @@ const AVAILABLE_ELECTIONS = [
   }
 ];
 
+// Add this near the top after AVAILABLE_ELECTIONS
+const COUNTY_MEETING_LINKS = {
+  hernando: {
+    commission: 'https://www.hernandocounty.us/departments/departments-a-c/bocc/agendas-minutes',
+    schoolBoard: 'https://www.hernandoschools.org/board'
+  },
+  citrus: {
+    commission: 'https://www.citrusbocc.com/departments/bocc/agendas-minutes',
+    schoolBoard: 'https://www.citrusschools.org/domain/52'
+  },
+  hillsborough: {
+    commission: 'https://www.hillsboroughcounty.org/en/government/board-of-county-commissioners/meetings-and-agendas',
+    schoolBoard: 'https://www.sdhc.k12.fl.us/board/'
+  },
+  polk: {
+    commission: 'https://www.polk-county.net/county-offices/board-of-county-commissioners/meetings-agendas',
+    schoolBoard: 'https://www.polkschoolsfl.com/boardmembers'
+  },
+  pinellas: {
+    commission: 'https://pinellas.gov/government/elected-officials/board-of-county-commissioners/meetings/',
+    schoolBoard: 'https://www.pcsb.org/domain/1337'
+  },
+  pasco: {
+    commission: 'https://www.pascocountyfl.net/219/Board-of-County-Commissioners',
+    schoolBoard: 'https://www.pasco.k12.fl.us/board/meetings/'
+  }
+};
+
+
 function ElectionSelector({ onElectionSelect }) {
   const [selectedState, setSelectedState] = useState('');
   const [selectedCounty, setSelectedCounty] = useState('');
@@ -195,6 +224,37 @@ function ElectionSelector({ onElectionSelect }) {
                   </option>
                 ))}
               </select>
+            </div>
+          )}
+
+          {/* Meeting Links */}
+          {selectedCounty && COUNTY_MEETING_LINKS[selectedCounty] && (
+            <div style={{
+              marginBottom: '20px',
+              padding: '15px',
+              backgroundColor: '#e3f2fd',
+              borderRadius: '6px',
+              borderLeft: '4px solid #2196f3'
+            }}>
+              <strong style={{ color: '#1976d2', fontSize: '16px' }}>📅 Meeting Information</strong>
+              <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <a 
+                  href={COUNTY_MEETING_LINKS[selectedCounty].commission} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ color: '#1976d2', textDecoration: 'none' }}
+                >
+                  → County Commission Meetings & Agendas
+                </a>
+                <a 
+                  href={COUNTY_MEETING_LINKS[selectedCounty].schoolBoard} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#1976d2', textDecoration: 'none' }}
+                >
+                  → School Board Meetings & Agendas
+                </a>
+              </div>
             </div>
           )}
 
