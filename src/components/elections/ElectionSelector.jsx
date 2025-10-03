@@ -115,7 +115,7 @@ function ElectionSelector({ onElectionSelect }) {
           marginBottom: '10px',
           textAlign: 'center'
         }}>
-          Election Candidate Matcher
+          Your Voter Guide
         </h1>
         
         <p style={{
@@ -124,7 +124,8 @@ function ElectionSelector({ onElectionSelect }) {
           textAlign: 'center',
           marginBottom: '30px'
         }}>
-          Find candidates who align with your values and priorities
+          Find candidates and understand ballot measures that align with your values
+
         </p>
 
         <form onSubmit={handleSubmit}>
