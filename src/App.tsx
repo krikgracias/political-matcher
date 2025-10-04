@@ -4,7 +4,7 @@ import ElectionSelector from './components/elections/ElectionSelector';
 import ElectionMatcher from './components/elections/ElectionMatcher';
 import BallotMeasureMatcher from './components/ballot-measures/BallotMeasureMatcher';
 import MapSelector from './components/MapSelector';
-import CountyOfficesSelector from './components/CountyOfficesSelector'; // Add this line
+import CountyOfficesSelector from './components/CountyOfficesSelector';
 import { ELECTION_REGISTRY } from './data/electionRegistry';
 import { LocationSelection } from './types/map.types';
 
@@ -21,29 +21,38 @@ function App() {
   const [electionConfig, setElectionConfig] = useState<any>(null);
   
   const handleMapLocationSelect = ({ state, county }: LocationSelection): void => {
-    // Store the selected location
     setSelectedLocation({ state, county });
     setViewMode('county-offices');
   };
   
-const handleOfficeSelect = (office: string, year?: string): void => {
-  if (!selectedLocation) return;
-  
-  let electionKey = `${selectedLocation.state}-${selectedLocation.county}-${office}`;
-  if (year) {
-    electionKey += `-${year}`;
-  }
-  
-  console.log('Looking for election key:', electionKey); // Debug log
-  
-  const config = ELECTION_REGISTRY[electionKey];
-  if (config) {
-    console.log('Found config:', config); // Debug log
-    setElectionConfig(config);
-  } else {
-    console.error('No config found for:', electionKey);
-  }
-};
+  const handleOfficeSelect = (office: string, year?: string): void => {
+    if (!selectedLocation) return;
+    
+    // Normalize the office name for the election key
+    let normalizedOffice = office.toLowerCase().replace(/\s+/g, '-');
+    
+    // Special handling for ballot measures
+    if (office.toLowerCase().includes('ballot') || office.toLowerCase().includes('measure')) {
+      normalizedOffice = 'ballot-measures';
+    }
+    
+    let electionKey = `${selectedLocation.state}-${selectedLocation.county}-${normalizedOffice}`;
+    if (year) {
+      electionKey += `-${year}`;
+    }
+    
+    console.log('Looking for election key:', electionKey);
+    console.log('Available keys:', Object.keys(ELECTION_REGISTRY));
+    
+    const config = ELECTION_REGISTRY[electionKey];
+    if (config) {
+      console.log('Found config:', config);
+      setElectionConfig(config);
+    } else {
+      console.error('No config found for:', electionKey);
+      console.error('Available election keys:', Object.keys(ELECTION_REGISTRY));
+    }
+  };
   
   const checkUrlParams = (): void => {
     const params = new URLSearchParams(window.location.search);
@@ -71,7 +80,18 @@ const handleOfficeSelect = (office: string, year?: string): void => {
   
   // If an election is selected, show it
   if (electionConfig) {
-    if (electionConfig.office === 'ballot-measures') {
+    // Check if it's a ballot measure by looking at multiple indicators
+    const isBallotMeasure = 
+      electionConfig.office === 'ballot-measures' ||
+      electionConfig.office === 'Ballot Measures' ||
+      electionConfig.type === 'ballot-measures' ||
+      (typeof electionConfig.questions?.[0]?.measure !== 'undefined') ||
+      electionConfig.title?.toLowerCase().includes('ballot') ||
+      electionConfig.title?.toLowerCase().includes('measure');
+    
+    console.log('Is ballot measure?', isBallotMeasure, electionConfig);
+    
+    if (isBallotMeasure) {
       return <BallotMeasureMatcher config={electionConfig} />;
     }
     return <ElectionMatcher config={electionConfig} />;

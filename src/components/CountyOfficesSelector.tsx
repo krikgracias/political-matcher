@@ -80,6 +80,13 @@ const CountyOfficesSelector: React.FC<CountyOfficesSelectorProps> = ({
   
   const meetingLinks = COUNTY_MEETING_LINKS[county];
   
+  // Handler with debug logging
+  const handleOfficeClick = (office: string, year?: string) => {
+    console.log('CountyOfficesSelector: Clicked office:', office, 'year:', year);
+    console.log('CountyOfficesSelector: Calling onOfficeSelect with:', office, year);
+    onOfficeSelect(office, year);
+  };
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
@@ -141,7 +148,7 @@ const CountyOfficesSelector: React.FC<CountyOfficesSelectorProps> = ({
           {offices.map((item) => (
             <button
               key={item.office}
-              onClick={() => onOfficeSelect(item.office, item.year)}
+              onClick={() => handleOfficeClick(item.office, item.year)}
               className="bg-white hover:bg-blue-50 border-2 border-gray-200 hover:border-blue-400 
                          rounded-lg p-6 text-left transition-all duration-200 
                          hover:shadow-lg group"
