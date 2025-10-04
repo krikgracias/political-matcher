@@ -8,6 +8,7 @@ interface BallotMeasureMatcherProps {
 }
 
 const BallotMeasureMatcher = ({ config }: BallotMeasureMatcherProps) => {
+  console.log('Ballot Measure Config:', config); 
   const measure = config;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
