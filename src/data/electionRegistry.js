@@ -51,7 +51,7 @@ export const ELECTION_REGISTRY = {
   'florida-hernando-school-board': HernandoSchoolBoard,
   'florida-hernando-county-commission': HernandoCountyCommission,
   'florida-hernando-city-council': BrooksvilleCityCouncil,
-  'florida-hernando-ballot-measures-2026': HernandoBallotMeasures,
+  // 'florida-hernando-ballot-measures-2026': HernandoBallotMeasures,
   
   // PINELLAS COUNTY
   'florida-pinellas-school-board': PinellasSchoolBoard,
@@ -74,10 +74,10 @@ export const ELECTION_REGISTRY = {
   'florida-citrus-county-commission': CitrusCountyCommission,
 
   // Add to your ELECTION_REGISTRY
-'florida-hernando-ballot-measures-2026': AMENDMENT_3_2024,
-'florida-citrus-ballot-measures-2026': AMENDMENT_3_2024,
-'florida-hillsborough-ballot-measures-2026': HILLSBOROUGH_TRANSIT_TAX_2024,
-'florida-polk-ballot-measures-2026': AMENDMENT_3_2024,
-'florida-pinellas-ballot-measures-2026': AMENDMENT_3_2024,
-'florida-pasco-ballot-measures-2026': AMENDMENT_3_2024,
-};
+// 'florida-hernando-ballot-measures-2026': AMENDMENT_3_2024,
+// 'florida-citrus-ballot-measures-2026': AMENDMENT_3_2024,
+// 'florida-hillsborough-ballot-measures-2026': HILLSBOROUGH_TRANSIT_TAX_2024,
+// 'florida-polk-ballot-measures-2026': AMENDMENT_3_2024,
+// 'florida-pinellas-ballot-measures-2026': AMENDMENT_3_2024,
+// 'florida-pasco-ballot-measures-2026': AMENDMENT_3_2024,
+// };

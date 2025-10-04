@@ -169,8 +169,8 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
         { value: 'no-reform', label: 'NO - But support reform' },
         { value: 'no-strongly', label: 'NO - Oppose entirely' }
       ],
-      order: 1,
-      active: true
+      // This is the answer that aligns with a "YES" vote on the measure
+      proVoteAnswer: 'yes-strongly' 
     },
     {
       id: 'corporate-control',
@@ -181,8 +181,8 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
         { value: 'minor-concern', label: 'Minor concern' },
         { value: 'not-concerned', label: 'Not concerned' }
       ],
-      order: 2,
-      active: true
+      // Someone voting "YES" is less likely to be concerned
+      proVoteAnswer: 'not-concerned'
     },
     {
       id: 'priority',
@@ -194,8 +194,8 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
         { value: 'somewhat', label: 'Somewhat important' },
         { value: 'not-important', label: 'Not important' }
       ],
-      order: 3,
-      active: true
+      // Someone voting "YES" is more likely to consider it a high priority
+      proVoteAnswer: 'top-priority'
     }
   ],
   
