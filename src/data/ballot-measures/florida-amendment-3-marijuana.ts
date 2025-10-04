@@ -13,7 +13,7 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
   title: 'Adult Use of Marijuana',
   shortTitle: 'Marijuana Legalization',
   ballotTitle: 'Amendment 3: Allows adults 21 years or older to possess, purchase, or use marijuana products and marijuana accessories for non-medical personal consumption',
-  number: '3',
+  number: 3,
   
   electionDate: '2024-11-05',
   status: 'completed',
