@@ -149,15 +149,13 @@ interface BallotMeasureMatcherProps {
 }
 
 const BallotMeasureMatcher = ({ config }: BallotMeasureMatcherProps) => {
-  // ... (no changes to the logic inside the component) ...
-
-  // Find the final return statement and replace it with this:
   const question = config.questions[currentQuestion];
   const progress = ((currentQuestion + 1) / config.questions.length) * 100;
 
   return (
     <div className="bg-gray-900 text-white min-h-screen p-6">
       <div className="max-w-3xl mx-auto">
+        {/* Title and Progress Bar Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-4">
             {config.shortTitle}
@@ -167,21 +165,20 @@ const BallotMeasureMatcher = ({ config }: BallotMeasureMatcherProps) => {
           </div>
         </div>
         
-        <div className="max-w-3xl mx-auto p-4">
-          <h2 className="text-xl font-bold text-gray-300 mb-2">Question {currentQuestion + 1} of {config.questions.length}</h2>
-          <h3 className="text-2xl font-semibold text-white mb-6">{question.text}</h3>
-          
-          <div className="grid grid-cols-1 gap-4">
-            {question.options.map(option => (
-              <button
-                key={option.value}
-                onClick={() => handleAnswer(question.id, option.value)}
-                className="block w-full p-4 text-left rounded-lg border border-gray-600 bg-gray-800 text-white hover:bg-gray-700 hover:border-gray-500 transition-colors"
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
+        {/* Questionnaire Section (no extra container needed) */}
+        <h2 className="text-xl font-bold text-gray-300 mb-2">Question {currentQuestion + 1} of {config.questions.length}</h2>
+        <h3 className="text-2xl font-semibold text-white mb-6">{question.text}</h3>
+        
+        <div className="grid grid-cols-1 gap-4">
+          {question.options.map(option => (
+            <button
+              key={option.value}
+              onClick={() => handleAnswer(question.id, option.value)}
+              className="block w-full p-4 text-left rounded-lg border border-gray-600 bg-gray-800 text-white hover:bg-gray-700 hover:border-gray-500 transition-colors"
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
       </div>
     </div>
