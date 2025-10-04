@@ -97,5 +97,5 @@ return (
   </div>
 );
 }
-
+ 
 export default ElectionMatcher;
