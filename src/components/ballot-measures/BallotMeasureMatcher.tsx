@@ -3,7 +3,8 @@ import { CheckCircle, XCircle, DollarSign, Scale } from 'lucide-react';
 import type { BallotMeasureConfig } from '../../types';
 
 interface BallotMeasureMatcherProps {
-  config: BallotMeasureConfig;
+  config: any;
+  onBack?: () => void;  // Add this line
 }
 
 const BallotMeasureMatcher = ({ config }: BallotMeasureMatcherProps) => {
