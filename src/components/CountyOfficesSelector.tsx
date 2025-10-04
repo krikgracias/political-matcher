@@ -8,6 +8,34 @@ interface CountyOfficesSelectorProps {
   onBack: () => void;
 }
 
+// Meeting links data
+const COUNTY_MEETING_LINKS: Record<string, any> = {
+  hernando: {
+    commission: 'https://hernandocountyfl.legistar.com/Calendar.aspx',
+    schoolBoard: 'https://hernandoschools.legistar.com/Calendar.aspx'
+  },
+  citrus: {
+    commission: 'https://citrusclerk.portal.civicclerk.com/',
+    schoolBoard: 'https://citrus-k12-fl.community.highbond.com/Portal/MeetingTypeList.aspx'
+  },
+  hillsborough: {
+    commission: 'https://hcfl.gov/events',
+    schoolBoard: 'https://www.hillsboroughschools.org/events?section_ids=493682&view=cal-month'
+  },
+  polk: {
+    commission: 'https://polkcountyfl.legistar.com/Calendar.aspx',
+    schoolBoard: 'https://go.boarddocs.com/fl/polk/Board.nsf/Public?open'
+  },
+  pinellas: {
+    commission: 'https://pinellas.gov/events/list/?tribe_eventcategory=2058',
+    schoolBoard: 'https://www.pcsb.org/Page/3924'
+  },
+  pasco: {
+    commission: 'https://www.pascocountyfl.gov/government/agendas_minutes.php',
+    schoolBoard: 'https://go.boarddocs.com/fl/pasco/Board.nsf/Public'
+  }
+};
+
 const CountyOfficesSelector: React.FC<CountyOfficesSelectorProps> = ({
   state,
   county,
@@ -50,6 +78,8 @@ const CountyOfficesSelector: React.FC<CountyOfficesSelectorProps> = ({
     });
   }
   
+  const meetingLinks = COUNTY_MEETING_LINKS[county];
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 p-8">
       <div className="max-w-4xl mx-auto">
@@ -70,6 +100,43 @@ const CountyOfficesSelector: React.FC<CountyOfficesSelectorProps> = ({
           Choose an election type to view candidates and measures
         </p>
         
+        {/* Meeting Links Section */}
+        {meetingLinks && (
+          <div className="mb-8 p-6 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+            <h3 className="text-lg font-semibold text-blue-900 mb-3">
+              📅 County Meeting Information
+            </h3>
+            <p className="text-sm text-gray-700 mb-3">
+              Looking for meeting agendas and schedules?
+            </p>
+            <div className="flex flex-col gap-2">
+              <a 
+                href={meetingLinks.commission} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center gap-1"
+              >
+                → County Commission Meetings & Agendas
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+              <a 
+                href={meetingLinks.schoolBoard} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 hover:underline inline-flex items-center gap-1"
+              >
+                → School Board Meetings & Agendas
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        )}
+        
+        {/* Election Options */}
         <div className="grid gap-4">
           {offices.map((item) => (
             <button

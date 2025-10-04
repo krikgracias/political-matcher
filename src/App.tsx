@@ -26,19 +26,24 @@ function App() {
     setViewMode('county-offices');
   };
   
-  const handleOfficeSelect = (office: string, year?: string): void => {
-    if (!selectedLocation) return;
-    
-    let electionKey = `${selectedLocation.state}-${selectedLocation.county}-${office}`;
-    if (year) {
-      electionKey += `-${year}`;
-    }
-    
-    const config = ELECTION_REGISTRY[electionKey];
-    if (config) {
-      setElectionConfig(config);
-    }
-  };
+const handleOfficeSelect = (office: string, year?: string): void => {
+  if (!selectedLocation) return;
+  
+  let electionKey = `${selectedLocation.state}-${selectedLocation.county}-${office}`;
+  if (year) {
+    electionKey += `-${year}`;
+  }
+  
+  console.log('Looking for election key:', electionKey); // Debug log
+  
+  const config = ELECTION_REGISTRY[electionKey];
+  if (config) {
+    console.log('Found config:', config); // Debug log
+    setElectionConfig(config);
+  } else {
+    console.error('No config found for:', electionKey);
+  }
+};
   
   const checkUrlParams = (): void => {
     const params = new URLSearchParams(window.location.search);
