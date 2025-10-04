@@ -22,17 +22,18 @@ export const BALLOT_MEASURES = {
 export function getBallotMeasuresForLocation(county, state = 'florida') {
   const measures = [];
   
-  Object.entries(BALLOT_MEASURES).forEach(([id, measure]) => {
-    // Include statewide measures
-    if (measure.jurisdictions.includes(state) && measure.counties === null) {
-      measures.push(measure.config);
+  for (const [id, measure] of Object.entries(BALLOT_MEASURES)) {
+    const isStatewide = measure.counties === null;
+    const isForCounty = county && measure.counties?.includes(county.toLowerCase());
+
+    if (isStatewide || isForCounty) {
+      // ✅ This now pushes the ID and the rest of the config data together
+      measures.push({
+        id: id, 
+        ...measure.config 
+      });
     }
-    
-    // Include county-specific measures
-    if (county && measure.counties && measure.counties.includes(county.toLowerCase())) {
-      measures.push(measure.config);
-    }
-  });
+  }
   
   return measures;
 }
