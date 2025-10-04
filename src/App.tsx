@@ -1,19 +1,21 @@
 import { useState, useEffect } from 'react';
 import ElectionMatcher from './components/elections/ElectionMatcher.jsx';
 import ElectionSelector from './components/elections/ElectionSelector.jsx';
-import type { ElectionConfig } from './types';
-import { ELECTION_REGISTRY } from './data/electionRegistry.js';
-import BallotMeasuresPage from './pages/BallotMeasuresPage';
 import BallotMeasureMatcher from './components/ballot-measures/BallotMeasureMatcher';
+import type { ElectionConfig, BallotMeasureConfig } from './types'; // Make sure both types are imported
+import { ELECTION_REGISTRY } from './data/electionRegistry.js';
+import { getBallotMeasuresForLocation } from './data/ballotMeasuresRegistry.js'; // Import ballot measure function
 
 function App() {
+  // 1. USE SEPARATE STATE VARIABLES
   const [electionConfig, setElectionConfig] = useState<ElectionConfig | null>(null);
+  const [ballotMeasureConfig, setBallotMeasureConfig] = useState<BallotMeasureConfig | null>(null);
+  
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [showLanding, setShowLanding] = useState<boolean>(true);
 
   useEffect(() => {
-    // Check if URL has election parameters
     const urlParams = new URLSearchParams(window.location.search);
     const state = urlParams.get('state');
     const county = urlParams.get('county');
@@ -21,45 +23,42 @@ function App() {
     
     if (state && county && office) {
       setShowLanding(false);
-      loadElectionConfig(state, county, office);
+      loadConfig(state, county, office);
     }
   }, []);
 
-// In loadElectionConfig function:
-
-const loadElectionConfig = async (state: string, county: string, office: string): Promise<void> => {
+  // 2. UPDATE YOUR LOADING LOGIC
+  const loadConfig = async (state: string, county: string, office: string): Promise<void> => {
     setLoading(true);
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const year = urlParams.get('year');
-      
-      let configKey;
-      if (office === 'ballot-measures' && year) {
-        configKey = `${state}-${county}-ballot-measures-${year}`;
-      } else {
-        configKey = `${state}-${county}-${office}`;
-      }
-      
-      console.log('Looking for election config key:', configKey);
-      
-      const config = ELECTION_REGISTRY[configKey];
-      console.log('Found config object:', config);
+    setError(null);
+    setElectionConfig(null);
+    setBallotMeasureConfig(null);
 
-      if (!config) {
-        throw new Error(`Election config not found: ${configKey}`);
+    try {
+      if (office === 'ballot-measures') {
+        const measures = getBallotMeasuresForLocation(county, state);
+        if (measures.length === 0) {
+          throw new Error('No ballot measures found for this location.');
+        }
+        // This loads the first available measure. You can add more specific logic if needed.
+        setBallotMeasureConfig(measures[0]);
+      } else {
+        const configKey = `${state}-${county}-${office}`;
+        const config = ELECTION_REGISTRY[configKey];
+        if (!config) {
+          throw new Error(`Election config not found: ${configKey}`);
+        }
+        setElectionConfig(config);
       }
-      
-      setElectionConfig(config);
-      setLoading(false);
-      setError(null);
-    } catch (err) {
-      console.error('Failed to load election config:', err);
-      setError(`Election not found: ${state}-${county}-${office}`);
+    } catch (err: any) {
+      console.error('Failed to load config:', err);
+      setError(err.message || `Content not found for: ${state}-${county}-${office}`);
+    } finally {
       setLoading(false);
     }
   };
+
   const handleElectionSelect = () => {
-    // Re-read URL parameters and load election
     const urlParams = new URLSearchParams(window.location.search);
     const state = urlParams.get('state') || '';
     const county = urlParams.get('county') || '';
@@ -67,87 +66,70 @@ const loadElectionConfig = async (state: string, county: string, office: string)
     
     if (state && county && office) {
       setShowLanding(false);
-      loadElectionConfig(state, county, office);
+      loadConfig(state, county, office);
     }
   };
 
+  // 3. UPDATE THE RESET LOGIC
   const handleBackToLanding = () => {
     window.history.pushState(null, '', '/');
     setShowLanding(true);
     setElectionConfig(null);
+    setBallotMeasureConfig(null); // Reset the new state as well
     setError(null);
   };
 
-  // Show landing page
+  // The landing, loading, and error views remain the same
   if (showLanding) {
     return <ElectionSelector onElectionSelect={handleElectionSelect} />;
   }
-
-  // Show loading
   if (loading) {
-    return (
-      <div style={{padding: '40px', textAlign: 'center'}}>
-        <h2>Loading election data...</h2>
-      </div>
-    );
+    return <div style={{padding: '40px', textAlign: 'center'}}><h2>Loading...</h2></div>;
   }
-
-  // Show error
   if (error) {
     return (
-      <div style={{padding: '40px', textAlign: 'center'}}>
-        <h2>Election Not Available</h2>
-        <p>{error}</p>
-        <button 
-          onClick={handleBackToLanding}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#3498db',
-            color: 'white',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            marginTop: '20px'
-          }}
-        >
-          Back to Election Selection
-        </button>
+        <div style={{padding: '40px', textAlign: 'center'}}>
+            <h2>Content Not Available</h2>
+            <p>{error}</p>
+            <button onClick={handleBackToLanding}>Back to Selection</button>
+        </div>
+    );
+  }
+
+  // 4. UPDATE THE RENDERING LOGIC
+  const backButton = (
+    <div style={{ padding: '10px 20px', backgroundColor: '#f8f9fa', borderBottom: '1px solid #ddd' }}>
+      <button onClick={handleBackToLanding} style={{ padding: '8px 16px', backgroundColor: '#6c757d', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+        ← Back to Selection
+      </button>
+    </div>
+  );
+  
+  if (ballotMeasureConfig) {
+    return (
+      <div>
+        {backButton}
+        <BallotMeasureMatcher config={ballotMeasureConfig} />
+      </div>
+    );
+  }
+  
+  if (electionConfig) {
+    return (
+      <div>
+        {backButton}
+        <ElectionMatcher config={electionConfig} />
       </div>
     );
   }
 
-  // Show election matcher with back button
-// Check if this is a ballot measure
-const isBallotMeasure = electionConfig?.office === 'ballot-measures';
-
-return (
-  <div>
-    <div style={{
-      padding: '10px 20px',
-      backgroundColor: '#f8f9fa',
-      borderBottom: '1px solid #ddd'
-    }}>
-      <button
-        onClick={handleBackToLanding}
-        style={{
-          padding: '8px 16px',
-          backgroundColor: '#6c757d',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer',
-          fontSize: '14px'
-        }}
-      >
-        ← Back to Election Selection
-      </button>
+  // Fallback if no config is loaded after loading completes
+  return (
+    <div style={{padding: '40px', textAlign: 'center'}}>
+        <h2>Could not load content.</h2>
+        <button onClick={handleBackToLanding}>Back to Selection</button>
     </div>
-    {isBallotMeasure ? (
-      <BallotMeasureMatcher config={electionConfig!} />
-    ) : (
-      <ElectionMatcher config={electionConfig!} />
-    )}
-  </div>
-);
+  );
 }
+
 export default App;
