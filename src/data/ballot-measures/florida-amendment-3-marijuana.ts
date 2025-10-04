@@ -1,4 +1,5 @@
 // src/data/ballot-measures/florida-amendment-3-marijuana.ts
+import type { Argument } from "../../types";
 
 export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
   id: 'florida-amendment-3-2024',
@@ -107,7 +108,7 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
       argument: 'Many people who use marijuana medicinally cannot afford doctor visits and renewal fees for medical cards. This makes it more accessible for those who need it.',
       strength: 'medium'
     }
-  ],
+  ] as Argument[], 
   
   opponentsArguments: [
     {
@@ -128,7 +129,7 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
       argument: 'Does not allow home growing, leaving users dependent on expensive corporate dispensaries. Better, more complete legalization measures exist in other states.',
       strength: 'medium'
     }
-  ],
+  ] as Argument[],
   
   supporters: [
     {

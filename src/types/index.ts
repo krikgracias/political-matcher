@@ -50,6 +50,7 @@ export interface Argument {
   title: string;
   argument: string;
   strength: 'high' | 'medium' | 'low';
+  category: string;
 }
 
 export interface BallotMeasureConfig {
