@@ -22,37 +22,28 @@ function Questionnaire({ questions, onComplete }) {
     }
   };
 
-  return (
-    <div style={{ padding: '20px', maxWidth: '600px', backgroundColor: '#FFFFFF' }}>
-      <h2 style={{color: '#000000', fontSize: '24px'}}>Question {currentIndex + 1} of {questions.length}</h2>
-      <h3 style={{color: '#000000', fontSize: '20px', marginBottom: '20px'}}>{currentQuestion.text}</h3>
-      
-      <div>
-        {currentQuestion.options.map(option => (
-          <button
-            key={option.value}
-            onClick={() => handleAnswer(option.value)}
-            style={{
-              display: 'block',
-              width: '100%',
-              padding: '15px',
-              margin: '10px 0',
-              backgroundColor: '#F0F0F0',
-              border: '2px solid #000000',
-              cursor: 'pointer',
-              textAlign: 'left',
-              fontSize: '16px',
-              color: '#000000',
-              borderRadius: '5px'
-            }}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#E0E0E0'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#F0F0F0'}
-          >
-            {option.label}
-          </button>
-        ))}
-      </div>
+ return (
+  // Use padding and set a max-width for the container
+  <div className="max-w-3xl mx-auto p-4">
+    
+    {/* Question counter and text with dark theme colors */}
+    <h2 className="text-xl font-bold text-gray-300 mb-2">Question {currentIndex + 1} of {questions.length}</h2>
+    <h3 className="text-2xl font-semibold text-white mb-6">{currentQuestion.text}</h3>
+    
+    {/* Container for the answer buttons */}
+    <div className="space-y-4">
+      {currentQuestion.options.map(option => (
+        <button
+          key={option.value}
+          onClick={() => handleAnswer(option.value)}
+          // Styling for the buttons in the dark theme
+          className="block w-full p-4 text-left rounded-lg border border-gray-600 bg-gray-800 text-white hover:bg-gray-700 hover:border-gray-500 transition-colors"
+        >
+          {option.label}
+        </button>
+      ))}
     </div>
-  );
+  </div>
+);
 }
 export default Questionnaire;

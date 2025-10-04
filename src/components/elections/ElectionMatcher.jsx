@@ -11,84 +11,91 @@ function ElectionMatcher({ config }) {
     setShowResults(true);
   };
 
-  if (showResults) {
-    const matchResults = calculateAllMatches(userAnswers, config.candidates);
-    
-    return (
-      <div style={{padding: '20px', backgroundColor: '#FFFFFF', minHeight: '100vh'}}>
-        <h1 style={{color: '#000000', fontSize: '32px', textAlign: 'center'}}>
+ if (showResults) {
+  const matchResults = calculateAllMatches(userAnswers, config.candidates);
+  
+  return (
+    // Main container with dark background, light text, and padding
+    <div className="bg-gray-900 text-white min-h-screen p-6">
+      <div className="max-w-4xl mx-auto">
+        {/* Main title with centered text and spacing */}
+        <h1 className="text-4xl font-bold text-center mb-2">
           {config.title} - Your Results
         </h1>
-        <p style={{textAlign: 'center', color: '#666'}}>
+        {/* Subtitle with lighter, centered text */}
+        <p className="text-center text-gray-400 mb-8">
           You answered: {Object.keys(userAnswers).length} questions
         </p>
         
-        <h2 style={{color: '#000000'}}>Your Best Matches:</h2>
+        {/* Section header for the matches list */}
+        <h2 className="text-3xl font-bold mb-4">Your Best Matches:</h2>
+        
         {matchResults.map((result, index) => (
-          <div key={result.candidate.id} style={{
-            margin: '20px 0', 
-            padding: '20px', 
-            border: '3px solid #000',
-            borderColor: index === 0 ? '#006400' : '#000',
-            backgroundColor: index === 0 ? '#90EE90' : '#FFFFFF',
-            borderRadius: '8px'
-          }}>
-            <h3 style={{color: '#000000', margin: '0 0 10px 0', fontSize: '22px'}}>
+          <div 
+            key={result.candidate.id} 
+            // Card styling for each result with a dark background and border
+            // The top match gets a special green border
+            className={`bg-gray-800 border rounded-lg p-6 my-6 ${
+              index === 0 ? 'border-green-500' : 'border-gray-700'
+            }`}
+          >
+            <h3 className="text-2xl font-bold mb-2">
               {index + 1}. {result.candidate.name} 
-              <span style={{
-                color: index === 0 ? '#006400' : '#000000', 
-                fontSize: '20px',
-                fontWeight: 'bold'
-              }}>
-                - {result.matchPercentage}% Match
+              {/* Styling for the match percentage, top match is green */}
+              <span className={`font-bold ${
+                index === 0 ? 'text-green-400' : 'text-white'
+              }`}>
+                {' '} - {result.matchPercentage}% Match
               </span>
             </h3>
-            <p style={{color: '#000000', margin: '5px 0', fontSize: '16px'}}>
+            
+            {/* Candidate details with lighter text color for readability */}
+            <p className="text-gray-300 my-2">
               <strong>District:</strong> {result.candidate.district}
             </p>
-            <p style={{color: '#000000', margin: '5px 0', fontSize: '16px'}}>
+            <p className="text-gray-300 my-2">
               <strong>Position:</strong> {result.candidate.position}
             </p>
-            <p style={{color: '#000000', margin: '10px 0', fontSize: '16px'}}>
+            <p className="text-gray-300 my-4">
               {result.candidate.background}
             </p>
-            <p style={{color: '#000000', fontStyle: 'italic', fontSize: '14px'}}>
+            
+            {/* Summary text with italic and muted color */}
+            <p className="text-gray-400 italic text-sm mt-4">
               You agreed on {result.matches} out of {result.totalQuestions} issues
             </p>
           </div>
         ))}
         
-        <button 
-          onClick={() => {setShowResults(false); setUserAnswers({});}}
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#2196F3',
-            color: 'white',
-            border: 'none',
-            cursor: 'pointer',
-            marginTop: '20px'
-          }}
-        >
-          Start Over
-        </button>
+        <div className="text-center mt-8">
+          <button 
+            onClick={() => {setShowResults(false); setUserAnswers({});}}
+            // Styling for the "Start Over" button
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Start Over
+          </button>
+        </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
-  return (
-    <div style={{backgroundColor: '#FFFFFF', minHeight: '100vh', padding: '20px'}}>
-      <h1 style={{color: '#000000', fontSize: '32px', textAlign: 'center'}}>
-        {config.title}
-      </h1>
-      <p style={{textAlign: 'center', color: '#666', marginBottom: '30px'}}>
-        {config.description}
-      </p>
+return (
+  // Main container with dark background
+  <div className="bg-gray-900 text-white min-h-screen p-6">
+    <div className="max-w-4xl mx-auto">
+      {/* Title and description with light text */}
+      <h1 className="text-4xl font-bold text-center mb-4">{config.title}</h1>
+      <p className="text-center text-gray-400 mb-8">{config.description}</p>
+      
       <Questionnaire 
         questions={config.questions}
         onComplete={handleComplete}
       />
     </div>
-  );
+  </div>
+);
 }
 
 export default ElectionMatcher;
