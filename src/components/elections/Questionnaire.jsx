@@ -28,7 +28,7 @@ function Questionnaire({ questions, onComplete }) {
 
   return (
     // Main container with padding and a max-width
-    <div className="max-w-3xl mx-auto p-4">
+<div className="max-w-3xl mx-auto p-4 border-4 border-red-500">
       
       {/* Question counter and text with dark theme colors */}
       <h2 className="text-xl font-bold text-gray-300 mb-2">Question {currentIndex + 1} of {questions.length}</h2>
