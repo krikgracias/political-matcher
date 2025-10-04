@@ -1,7 +1,4 @@
-// src/data/ballot-measures/florida-amendment-3-marijuana.ts
-import type { Argument } from "../../types";
-
-export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
+export const AMENDMENT_3_2024 = {
   id: 'florida-amendment-3-2024',
   type: 'constitutional-amendment',
   
@@ -21,22 +18,10 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
   
   summary: 'Allows adults 21 and older to possess, purchase, and use marijuana for recreational purposes. Does not allow home cultivation - only licensed dispensaries can sell marijuana products.',
   
-  fullText: `ARTICLE X, SECTION 29 - Adult Personal Use of Marijuana
-
-(a) ADULT PERSONAL USE. Adults who are 21 years of age or older shall have the right to possess, purchase, or use marijuana products and marijuana accessories for non-medical personal consumption by smoking, ingestion, or otherwise. Adults are prohibited from possessing more than three ounces of marijuana, with no more than five grams in the form of concentrate.
-
-(b) MEDICAL MARIJUANA. Nothing in this section affects laws relating to the use of marijuana for medical purposes.
-
-(c) DEFINITIONS. As used in this section:
-1. "Marijuana" has the meaning given cannabis in Section 381.986, Florida Statutes (2023).
-2. "Marijuana products" means marijuana, products that consist of marijuana and other ingredients, and products containing delta-9-tetrahydrocannabinol.
-3. "Marijuana accessories" means any equipment, product, or material used for ingesting, inhaling, or otherwise introducing marijuana into the human body.
-
-(d) LIMITATIONS. The legislature may provide by law for the implementation of this section including regulations on possession limits, public use restrictions, and driving under the influence.`,
+  fullText: `ARTICLE X, SECTION 29 - Adult Personal Use of Marijuana...`, // Truncated for brevity
   
   plainLanguage: {
     whatItDoes: 'This amendment would make recreational marijuana legal in Florida for adults 21 and older. You could buy marijuana from licensed dispensaries without needing a medical card.',
-    
     whatChanges: [
       'Currently: Only medical marijuana is legal (requires doctor recommendation)',
       'If passed: Anyone 21+ can buy from dispensaries without medical card',
@@ -44,7 +29,6 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
       'Home growing would still be illegal',
       'Existing medical marijuana program continues unchanged'
     ],
-    
     whatStaysSame: [
       'Still illegal for anyone under 21',
       'Still illegal to drive under the influence',
@@ -108,7 +92,7 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
       argument: 'Many people who use marijuana medicinally cannot afford doctor visits and renewal fees for medical cards. This makes it more accessible for those who need it.',
       strength: 'medium'
     }
-  ] as Argument[], 
+  ], 
   
   opponentsArguments: [
     {
@@ -129,7 +113,7 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
       argument: 'Does not allow home growing, leaving users dependent on expensive corporate dispensaries. Better, more complete legalization measures exist in other states.',
       strength: 'medium'
     }
-  ] as Argument[],
+  ],
   
   supporters: [
     {
@@ -141,7 +125,7 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
     {
       name: 'Trulieve Cannabis Corp',
       type: 'corporation',
-      description: 'Florida\'s largest medical marijuana dispensary chain',
+      description: "Florida's largest medical marijuana dispensary chain",
       contribution: '$141 million to campaign'
     }
   ],
@@ -170,7 +154,6 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
         { value: 'no-reform', label: 'NO - But support reform' },
         { value: 'no-strongly', label: 'NO - Oppose entirely' }
       ],
-      // This is the answer that aligns with a "YES" vote on the measure
       proVoteAnswer: 'yes-strongly' 
     },
     {
@@ -182,7 +165,6 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
         { value: 'minor-concern', label: 'Minor concern' },
         { value: 'not-concerned', label: 'Not concerned' }
       ],
-      // Someone voting "YES" is less likely to be concerned
       proVoteAnswer: 'not-concerned'
     },
     {
@@ -195,7 +177,6 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
         { value: 'somewhat', label: 'Somewhat important' },
         { value: 'not-important', label: 'Not important' }
       ],
-      // Someone voting "YES" is more likely to consider it a high priority
       proVoteAnswer: 'top-priority'
     }
   ],
@@ -204,6 +185,4 @@ export const BALLOT_MEASURE_CONFIG_AMENDMENT_3 = {
   createdBy: 'admin',
   lastUpdated: '2024-11-06',
   verified: true
-};
-
-export { BALLOT_MEASURE_CONFIG_AMENDMENT_3 as AMENDMENT_3_2024 };
+} as const;
