@@ -2,45 +2,14 @@ import React, { useState } from 'react';
 import { CheckCircle, XCircle, AlertCircle, DollarSign, Scale, TrendingUp, FileText } from 'lucide-react';
 import type { BallotMeasureConfig } from '../../types';
 
-// // 1. DEFINED TYPESCRIPT INTERFACES for type safety and autocompletion
-// interface Argument {
-//   title: string;
-//   argument: string;
-//   strength: 'high' | 'medium' | 'low';
-// }
-
-// interface QuestionOption {
-//   value: string;
-//   label: string;
-// }
-
-// interface Question {
-//   id: string;
-//   text: string;
-//   options: QuestionOption[];
-//   proVoteAnswer: string; // The answer value that aligns with a "YES" vote
-// }
-
-// interface BallotMeasureConfig {
-//   id: string;
-//   number: number;
-//   shortTitle: string;
-//   summary: string;
-//   electionDate: string;
-//   requirements: { threshold: number };
-//   results?: { passed: boolean; percentFor: number; percentAgainst: number; note: string; };
-//   fiscalImpact?: { summary: string; details: string[] };
-//   supportersArguments?: Argument[];
-//   opponentsArguments?: Argument[];
-//   questions: Question[];
-// }
+// The local interfaces have been removed, as the types are now imported from the central types file.
 
 interface BallotMeasureMatcherProps {
   config: BallotMeasureConfig;
 }
 
 const BallotMeasureMatcher = ({ config }: BallotMeasureMatcherProps) => {
-  // 2. ADDED INITIAL DATA CHECK to prevent crashes from invalid data
+  // Initial data check to prevent crashes from invalid props
   if (!config || !config.questions || config.questions.length === 0) {
     return (
       <div className="text-center p-10">
@@ -63,13 +32,13 @@ const BallotMeasureMatcher = ({ config }: BallotMeasureMatcherProps) => {
     }
   };
   
-  // 3. REWROTE RECOMMENDATION LOGIC to be generic and reusable
   const calculateRecommendation = () => {
     let proMeasureScore = 0;
     const totalQuestions = config.questions.length;
 
     config.questions.forEach(question => {
-      if (answers[question.id] === question.proVoteAnswer) {
+      // Assumes your question data in the config has a 'proVoteAnswer' property
+      if (answers[question.id] === (question as any).proVoteAnswer) {
         proMeasureScore++;
       }
     });
@@ -114,7 +83,6 @@ const BallotMeasureMatcher = ({ config }: BallotMeasureMatcherProps) => {
           </div>
         </div>
 
-        {/* Recommendation Block */}
         <div className={`rounded-lg shadow-lg p-6 mb-6 ${
           recommendation.vote === 'YES' ? 'bg-green-50 border-4 border-green-500' :
           recommendation.vote === 'NO' ? 'bg-red-50 border-4 border-red-500' :
@@ -124,7 +92,6 @@ const BallotMeasureMatcher = ({ config }: BallotMeasureMatcherProps) => {
           <p className="text-lg text-gray-800">{recommendation.reasoning}</p>
         </div>
         
-        {/* 4. ADDED DEFENSIVE RENDERING CHECKS to prevent crashes */}
         {config.fiscalImpact && (
             <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
               <h3 className="text-xl font-bold mb-4 flex items-center"><DollarSign className="w-6 h-6 mr-2 text-green-600" />Fiscal Impact</h3>
@@ -168,26 +135,48 @@ const BallotMeasureMatcher = ({ config }: BallotMeasureMatcherProps) => {
     );
   }
 
-  const question = config.questions[currentQuestion];
+  const question = config.questions[currentQuestion] as any;
   const progress = ((currentQuestion + 1) / config.questions.length) * 100;
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-gray-50 min-h-screen">
-        <div className="mb-8">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Amendment {config.number}: {config.shortTitle}</h1>
-            <div className="w-full bg-gray-200 rounded-full h-3"><div className="bg-blue-600 h-3 rounded-full" style={{ width: `${progress}%` }}/></div>
+      <div className="mb-8">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">Amendment {config.number}: {config.shortTitle}</h1>
+        <div className="w-full bg-gray-200 rounded-full h-3">
+          <div className="bg-blue-600 h-3 rounded-full" style={{ width: `${progress}%` }}/>
         </div>
-
-        <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">{question.text}</h2>
-            <div className="space-y-3">
-                {question.options.map((option) => (
-                    <button key={option.value} onClick={() => handleAnswer(question.id, option.value)} className="w-full text-left p-4 rounded-lg border-2 hover:border-blue-500 transition-all">
-                        <span className="text-gray-900 font-medium">{option.label}</span>
-                    </button>
-                ))}
-            </div>
+      </div>
+      
+      <div style={{ padding: '20px', maxWidth: '600px', backgroundColor: '#FFFFFF', margin: '0 auto' }}>
+        <h2 style={{color: '#000000', fontSize: '24px'}}>Question {currentQuestion + 1} of {config.questions.length}</h2>
+        <h3 style={{color: '#000000', fontSize: '20px', marginBottom: '20px'}}>{question.text}</h3>
+        
+        <div>
+          {question.options.map((option: { value: string; label: string }) => (
+            <button
+              key={option.value}
+              onClick={() => handleAnswer(question.id, option.value)}
+              style={{
+                display: 'block',
+                width: '100%',
+                padding: '15px',
+                margin: '10px 0',
+                backgroundColor: '#F0F0F0',
+                border: '2px solid #000000',
+                cursor: 'pointer',
+                textAlign: 'left',
+                fontSize: '16px',
+                color: '#000000',
+                borderRadius: '5px'
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#E0E0E0')}
+              onMouseOut={(e) => (e.currentTarget.style.backgroundColor = '#F0F0F0')}
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
+      </div>
     </div>
   );
 };
