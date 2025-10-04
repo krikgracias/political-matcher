@@ -80,4 +80,4 @@ export const ELECTION_REGISTRY = {
 // 'florida-polk-ballot-measures-2026': AMENDMENT_3_2024,
 // 'florida-pinellas-ballot-measures-2026': AMENDMENT_3_2024,
 // 'florida-pasco-ballot-measures-2026': AMENDMENT_3_2024,
-// };
+ };
