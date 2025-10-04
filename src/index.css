@@ -1,13 +1,13 @@
 /* src/index.css */
 
-/* These three lines import all of Tailwind's styles */
+/* These three lines are required to import all of Tailwind's styles */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* Define base styles for the entire application here */
 body {
-  /* Use Tailwind's @apply directive to set the default theme */
+  /* Use Tailwind's @apply directive to set the default dark theme */
   @apply bg-gray-900 text-white; 
   
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
