@@ -7,22 +7,36 @@ import MapSelector from './components/MapSelector';
 import { ELECTION_REGISTRY } from './data/electionRegistry';
 import { LocationSelection } from './types/map.types';
 
-type ViewMode = 'map' | 'dropdown';
+type ViewMode = 'map' | 'dropdown' | 'county-offices';
+
+interface SelectedLocation {
+  state: string;
+  county: string;
+}
 
 function App() {
   const [viewMode, setViewMode] = useState<ViewMode>('map');
-  const [selectedElection, setSelectedElection] = useState<string | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<SelectedLocation | null>(null);
   const [electionConfig, setElectionConfig] = useState<any>(null);
   
   const handleMapLocationSelect = ({ state, county }: LocationSelection): void => {
-    const params = new URLSearchParams({
-      state: state,
-      county: county,
-      viewMode: 'dropdown'
-    });
-    window.history.pushState(null, '', `?${params.toString()}`);
-    setViewMode('dropdown');
-    checkUrlParams();
+    // Store the selected location
+    setSelectedLocation({ state, county });
+    setViewMode('county-offices');
+  };
+  
+  const handleOfficeSelect = (office: string, year?: string): void => {
+    if (!selectedLocation) return;
+    
+    let electionKey = `${selectedLocation.state}-${selectedLocation.county}-${office}`;
+    if (year) {
+      electionKey += `-${year}`;
+    }
+    
+    const config = ELECTION_REGISTRY[electionKey];
+    if (config) {
+      setElectionConfig(config);
+    }
   };
   
   const checkUrlParams = (): void => {
@@ -41,7 +55,6 @@ function App() {
       const config = ELECTION_REGISTRY[electionKey];
       if (config) {
         setElectionConfig(config);
-        setSelectedElection(electionKey);
       }
     }
   };
@@ -50,11 +63,27 @@ function App() {
     checkUrlParams();
   }, []);
   
+  // If an election is selected, show it
   if (electionConfig) {
     if (electionConfig.office === 'ballot-measures') {
       return <BallotMeasureMatcher config={electionConfig} />;
     }
     return <ElectionMatcher config={electionConfig} />;
+  }
+  
+  // Show county offices selector after county is selected from map
+  if (viewMode === 'county-offices' && selectedLocation) {
+    return (
+      <CountyOfficesSelector
+        state={selectedLocation.state}
+        county={selectedLocation.county}
+        onOfficeSelect={handleOfficeSelect}
+        onBack={() => {
+          setSelectedLocation(null);
+          setViewMode('map');
+        }}
+      />
+    );
   }
   
   return (
