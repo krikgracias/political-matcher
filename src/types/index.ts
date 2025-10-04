@@ -33,3 +33,17 @@ export interface ElectionConfig {
   questions: Question[];
   candidates: Candidate[];
 }
+
+export interface BallotMeasureConfig {
+  id: string;
+  number: number;
+  shortTitle: string;
+  summary: string;
+  electionDate: string;
+  questions: any[]; // You can define a more detailed Question type later
+  requirements: { threshold: number };
+  fiscalImpact?: { summary: string; details: string[] };
+  supportersArguments?: { title: string; argument: string; strength: string }[];
+  opponentsArguments?: { title: string; argument: string; strength: string }[];
+  results?: any;
+}
