@@ -43,6 +43,8 @@ const loadElectionConfig = async (state: string, county: string, office: string)
       console.log('Looking for election config key:', configKey);
       
       const config = ELECTION_REGISTRY[configKey];
+      console.log('Found config object:', config);
+
       if (!config) {
         throw new Error(`Election config not found: ${configKey}`);
       }
