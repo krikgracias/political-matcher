@@ -31,17 +31,6 @@ import { ELECTION_CONFIG_COMMISSION as CitrusCountyCommission } from './election
 import { AMENDMENT_3_2024 } from './ballot-measures/florida-amendment-3-marijuana.js';
 import { HILLSBOROUGH_TRANSIT_TAX_2024 } from './ballot-measures/hillsborough-transit-tax.js';
 
-// ADD import for ballot measures at the top:
-import { getBallotMeasuresForLocation } from './ballotMeasuresRegistry.js';
-
-// Modify or add helper function to get ALL elections:
-export function getAllElectionsForLocation(county, state = 'florida') {
-  return {
-    candidateRaces: getElectionsForCounty(county),
-    ballotMeasures: getBallotMeasuresForLocation(county, state)
-  };
-}
-
 export const ELECTION_REGISTRY = {
   // STATE RACES (Multi-County)
   'florida-senate-district-11': Senate11,
@@ -50,30 +39,30 @@ export const ELECTION_REGISTRY = {
   'florida-hernando-school-board': HernandoSchoolBoard,
   'florida-hernando-county-commission': HernandoCountyCommission,
   'florida-hernando-city-council': BrooksvilleCityCouncil,
-  'florida-hernando-ballot-measures-2026': HernandoBallotMeasures,  // ✅ UNCOMMENTED
+  'florida-hernando-ballot-measures-2026': HernandoBallotMeasures,
   
   // PINELLAS COUNTY
   'florida-pinellas-school-board': PinellasSchoolBoard,
   'florida-pinellas-county-commission': PinellasCountyCommission,
-  'florida-pinellas-ballot-measures-2026': AMENDMENT_3_2024,  // ✅ UNCOMMENTED
+  'florida-pinellas-ballot-measures-2026': AMENDMENT_3_2024,
   
   // HILLSBOROUGH COUNTY
   'florida-hillsborough-school-board': HillsboroughSchoolBoard,
   'florida-hillsborough-county-commission': HillsboroughCountyCommission,
-  'florida-hillsborough-ballot-measures-2026': HILLSBOROUGH_TRANSIT_TAX_2024,  // ✅ UNCOMMENTED
+  'florida-hillsborough-ballot-measures-2026': HILLSBOROUGH_TRANSIT_TAX_2024,
   
   // POLK COUNTY
   'florida-polk-school-board': PolkSchoolBoard,
   'florida-polk-county-commission': PolkCountyCommission,
-  'florida-polk-ballot-measures-2026': AMENDMENT_3_2024,  // ✅ UNCOMMENTED
+  'florida-polk-ballot-measures-2026': AMENDMENT_3_2024,
   
   // PASCO COUNTY
   'florida-pasco-school-board': PascoSchoolBoard,
   'florida-pasco-county-commission': PascoCommission,
-  'florida-pasco-ballot-measures-2026': AMENDMENT_3_2024,  // ✅ UNCOMMENTED
+  'florida-pasco-ballot-measures-2026': AMENDMENT_3_2024,
   
   // CITRUS COUNTY
   'florida-citrus-school-board': CitrusSchoolBoard,
   'florida-citrus-county-commission': CitrusCountyCommission,
-  'florida-citrus-ballot-measures-2026': AMENDMENT_3_2024,  // ✅ UNCOMMENTED
+  'florida-citrus-ballot-measures-2026': AMENDMENT_3_2024,
 };
