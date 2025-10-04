@@ -24,25 +24,28 @@ function Questionnaire({ questions, onComplete }) {
     }
   };
 
-  return (
-    <div className="max-w-3xl mx-auto p-4">
-      <h2 className="text-xl font-bold text-gray-300 mb-2">Question {currentIndex + 1} of {questions.length}</h2>
-      <h3 className="text-2xl font-semibold text-white mb-6">{currentQuestion.text}</h3>
-      
-      {/* ✅ THIS IS THE FIX */}
-      <div className="grid grid-cols-1 gap-4">
-        {currentQuestion.options.map(option => (
-          <button
-            key={option.value}
-            onClick={() => handleAnswer(option.value)}
-            className="block w-full p-4 text-left rounded-lg border border-gray-600 bg-gray-800 text-white hover:bg-gray-700 hover:border-gray-500 transition-colors"
-          >
-            {option.label}
-          </button>
-        ))}
-      </div>
+// src/components/elections/Questionnaire.jsx
+
+return (
+  <div className="max-w-3xl mx-auto p-4">
+    <h2 className="text-xl font-bold text-gray-300 mb-2">Question {currentIndex + 1} of {questions.length}</h2>
+    <h3 className="text-2xl font-semibold text-white mb-6">{currentQuestion.text}</h3>
+    
+    {/* ✅ UPDATED to a uniform grid structure */}
+    <div className="grid grid-cols-1 grid-rows-4 gap-4">
+      {currentQuestion.options.map(option => (
+        <button
+          key={option.value}
+          onClick={() => handleAnswer(option.value)}
+          // Added "h-full" to make the button fill the grid cell's height
+          className="block w-full h-full p-4 text-left rounded-lg border border-gray-600 bg-gray-800 text-white hover:bg-gray-700 hover:border-gray-500 transition-colors"
+        >
+          {option.label}
+        </button>
+      ))}
     </div>
-  );
+  </div>
+);
 }
 
 export default Questionnaire;
