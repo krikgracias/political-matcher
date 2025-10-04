@@ -28,15 +28,10 @@ function App() {
   const handleOfficeSelect = (office: string, year?: string): void => {
     if (!selectedLocation) return;
     
-    // Normalize the office name for the election key
-    let normalizedOffice = office.toLowerCase().replace(/\s+/g, '-');
+    console.log('handleOfficeSelect called with:', { office, year, selectedLocation });
     
-    // Special handling for ballot measures
-    if (office.toLowerCase().includes('ballot') || office.toLowerCase().includes('measure')) {
-      normalizedOffice = 'ballot-measures';
-    }
-    
-    let electionKey = `${selectedLocation.state}-${selectedLocation.county}-${normalizedOffice}`;
+    // Build the election key
+    let electionKey = `${selectedLocation.state}-${selectedLocation.county}-${office}`;
     if (year) {
       electionKey += `-${year}`;
     }
@@ -47,10 +42,12 @@ function App() {
     const config = ELECTION_REGISTRY[electionKey];
     if (config) {
       console.log('Found config:', config);
+      console.log('Config type:', config.type, 'Config office:', config.office);
       setElectionConfig(config);
     } else {
       console.error('No config found for:', electionKey);
-      console.error('Available election keys:', Object.keys(ELECTION_REGISTRY));
+      console.error('Tried to find:', electionKey);
+      console.error('Available keys:', Object.keys(ELECTION_REGISTRY).join(', '));
     }
   };
   
@@ -80,21 +77,34 @@ function App() {
   
   // If an election is selected, show it
   if (electionConfig) {
-    // Check if it's a ballot measure by looking at multiple indicators
-    const isBallotMeasure = 
-      electionConfig.office === 'ballot-measures' ||
-      electionConfig.office === 'Ballot Measures' ||
-      electionConfig.type === 'ballot-measures' ||
-      (typeof electionConfig.questions?.[0]?.measure !== 'undefined') ||
-      electionConfig.title?.toLowerCase().includes('ballot') ||
-      electionConfig.title?.toLowerCase().includes('measure');
+    console.log('=== RENDERING ELECTION ===');
+    console.log('Full config:', electionConfig);
+    console.log('Config keys:', Object.keys(electionConfig));
+    console.log('Has questions?', !!electionConfig.questions);
+    console.log('Has candidates?', !!electionConfig.candidates);
+    console.log('Questions length:', electionConfig.questions?.length);
+    console.log('Candidates length:', electionConfig.candidates?.length);
     
-    console.log('Is ballot measure?', isBallotMeasure, electionConfig);
+    // Check if it's a ballot measure by looking at the type or office field
+    const isBallotMeasure = 
+      electionConfig.type === 'ballot-measures' ||
+      electionConfig.type === 'ballot-measure' ||
+      electionConfig.office === 'ballot-measures' ||
+      electionConfig.office === 'Ballot Measures';
+    
+    console.log('Is ballot measure?', isBallotMeasure);
+    
+    const handleBackFromElection = () => {
+      setElectionConfig(null);
+      setViewMode('county-offices');
+    };
     
     if (isBallotMeasure) {
-      return <BallotMeasureMatcher config={electionConfig} />;
+      console.log('Rendering BallotMeasureMatcher');
+      return <BallotMeasureMatcher config={electionConfig} onBack={handleBackFromElection} />;
     }
-    return <ElectionMatcher config={electionConfig} />;
+    console.log('Rendering ElectionMatcher');
+    return <ElectionMatcher config={electionConfig} onBack={handleBackFromElection} />;
   }
   
   // Show county offices selector after county is selected from map

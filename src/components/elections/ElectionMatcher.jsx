@@ -2,9 +2,16 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { calculateAllMatches } from '../../utils/matching.js';
 
-function ElectionMatcher({ config }) {
-  const navigate = useNavigate();
-
+function ElectionMatcher({ config, onBack }) {
+  if (!config || !config.questions || !config.candidates) {
+    return (
+      <div className="bg-gray-900 text-white min-h-screen p-10 text-center">
+        <h2 className="text-xl text-red-500">Configuration Error</h2>
+        <p>The data for this election is incomplete.</p>
+      </div>
+    );
+  }
+  
   // Add back navigation handler
   const handleBackToHome = () => {
     if (window.confirm('Are you sure you want to leave? Your progress will be lost.')) {
