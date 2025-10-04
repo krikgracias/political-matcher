@@ -50,5 +50,5 @@ function Questionnaire({ questions, onComplete }) {
     </div>
   );
 }
- 
+
 export default Questionnaire;
