@@ -1,38 +1,39 @@
 import React, { useState } from 'react';
 import { CheckCircle, XCircle, AlertCircle, DollarSign, Scale, TrendingUp, FileText } from 'lucide-react';
+import type { BallotMeasureConfig } from '../../types';
 
-// 1. DEFINED TYPESCRIPT INTERFACES for type safety and autocompletion
-interface Argument {
-  title: string;
-  argument: string;
-  strength: 'high' | 'medium' | 'low';
-}
+// // 1. DEFINED TYPESCRIPT INTERFACES for type safety and autocompletion
+// interface Argument {
+//   title: string;
+//   argument: string;
+//   strength: 'high' | 'medium' | 'low';
+// }
 
-interface QuestionOption {
-  value: string;
-  label: string;
-}
+// interface QuestionOption {
+//   value: string;
+//   label: string;
+// }
 
-interface Question {
-  id: string;
-  text: string;
-  options: QuestionOption[];
-  proVoteAnswer: string; // The answer value that aligns with a "YES" vote
-}
+// interface Question {
+//   id: string;
+//   text: string;
+//   options: QuestionOption[];
+//   proVoteAnswer: string; // The answer value that aligns with a "YES" vote
+// }
 
-interface BallotMeasureConfig {
-  id: string;
-  number: number;
-  shortTitle: string;
-  summary: string;
-  electionDate: string;
-  requirements: { threshold: number };
-  results?: { passed: boolean; percentFor: number; percentAgainst: number; note: string; };
-  fiscalImpact?: { summary: string; details: string[] };
-  supportersArguments?: Argument[];
-  opponentsArguments?: Argument[];
-  questions: Question[];
-}
+// interface BallotMeasureConfig {
+//   id: string;
+//   number: number;
+//   shortTitle: string;
+//   summary: string;
+//   electionDate: string;
+//   requirements: { threshold: number };
+//   results?: { passed: boolean; percentFor: number; percentAgainst: number; note: string; };
+//   fiscalImpact?: { summary: string; details: string[] };
+//   supportersArguments?: Argument[];
+//   opponentsArguments?: Argument[];
+//   questions: Question[];
+// }
 
 interface BallotMeasureMatcherProps {
   config: BallotMeasureConfig;

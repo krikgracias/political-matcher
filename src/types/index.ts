@@ -34,16 +34,22 @@ export interface ElectionConfig {
   candidates: Candidate[];
 }
 
+export interface Argument {
+  title: string;
+  argument: string;
+  strength: 'high' | 'medium' | 'low'; // Use the specific union type here
+}
+
 export interface BallotMeasureConfig {
   id: string;
   number: number;
   shortTitle: string;
   summary: string;
   electionDate: string;
-  questions: any[]; // You can define a more detailed Question type later
+  questions: any[]; 
   requirements: { threshold: number };
   fiscalImpact?: { summary: string; details: string[] };
-  supportersArguments?: { title: string; argument: string; strength: string }[];
-  opponentsArguments?: { title: string; argument: string; strength: string }[];
+  supportersArguments?: Argument[]; // Use the new Argument interface
+  opponentsArguments?: Argument[]; // Use the new Argument interface
   results?: any;
 }
