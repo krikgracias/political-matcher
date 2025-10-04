@@ -4,6 +4,7 @@ import ElectionSelector from './components/elections/ElectionSelector';
 import ElectionMatcher from './components/elections/ElectionMatcher';
 import BallotMeasureMatcher from './components/ballot-measures/BallotMeasureMatcher';
 import MapSelector from './components/MapSelector';
+import CountyOfficesSelector from './components/CountyOfficesSelector'; // Add this line
 import { ELECTION_REGISTRY } from './data/electionRegistry';
 import { LocationSelection } from './types/map.types';
 
