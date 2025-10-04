@@ -1,68 +1,67 @@
 // src/types/index.ts
 
-// Define a specific type for question options
 export interface QuestionOption {
-  value: string;
-  label: string;
+  readonly value: string;
+  readonly label: string;
 }
 
-// Update the main Question interface to be reusable
 export interface Question {
-  id: string;
-  text: string;
-  options: QuestionOption[];
-  // These properties can be optional if not all questions use them
-  category?: string;
-  order?: number;
-  active?: boolean;
-  proVoteAnswer?: string; // For ballot measure logic
+  readonly id: string;
+  readonly text: string;
+  readonly options: readonly QuestionOption[]; // ✅ Add readonly here
+  readonly category?: string;
+  readonly order?: number;
+  readonly active?: boolean;
+  readonly proVoteAnswer?: string;
 }
 
 export interface Candidate {
-  id:string;
-  name: string;
-  district: string;
-  position: string;
-  background: string;
-  positions: any; // Maps question IDs to answer values
-  // Optional properties
-  term?: string;
-  photo?: string;
-  website?: string;
-  email?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
+  readonly id:string;
+  readonly name: string;
+  readonly district: string;
+  readonly position: string;
+  readonly background: string;
+  readonly positions: any; 
+  readonly term?: string;
+  readonly photo?: string;
+  readonly website?: string;
+  readonly email?: string;
+  readonly createdAt?: Date;
+  readonly updatedAt?: Date;
 }
 
 export interface ElectionConfig {
-  id: string;
-  state: string;
-  county: string;
-  office: string;
-  title: string;
-  description: string;
-  electionDate: string;
-  questions: Question[]; // Uses the updated Question interface
-  candidates: Candidate[];
+  readonly id: string;
+  readonly state: string;
+  readonly county: string;
+  readonly office: string;
+  readonly title: string;
+  readonly description: string;
+  readonly electionDate: string;
+  readonly questions: readonly Question[];
+  readonly candidates: readonly Candidate[];
 }
 
 export interface Argument {
-  title: string;
-  argument: string;
-  strength: 'high' | 'medium' | 'low';
-  category: string;
+  readonly title: string;
+  readonly argument: string;
+  readonly strength: 'high' | 'medium' | 'low';
+  readonly category: string;
 }
 
 export interface BallotMeasureConfig {
-  id: string;
-  number: number;
-  shortTitle: string;
-  summary: string;
-  electionDate: string;
-  questions: Question[]; // Now uses the updated Question interface
-  requirements: { threshold: number };
-  fiscalImpact?: { summary: string; details: string[] };
-  supportersArguments?: Argument[];
-  opponentsArguments?: Argument[];
-  results?: any;
+  readonly id: string;
+  readonly number: number;
+  readonly shortTitle: string;
+  readonly summary: string;
+  readonly electionDate: string;
+  readonly questions: readonly Question[]; 
+  readonly requirements: { readonly threshold: number };
+  readonly fiscalImpact?: { 
+    readonly summary: string; 
+    readonly details: readonly string[] 
+  };
+  readonly supportersArguments?: readonly any[]; 
+  readonly opponentsArguments?: readonly any[];
+  readonly results?: any;
 }
