@@ -117,57 +117,26 @@ function ElectionSelector({ onElectionSelect }) {
         params.set('year', office.year);
       }
       
-      // Update URL and trigger election load
       window.history.pushState(null, '', `?${params.toString()}`);
       onElectionSelect();
     }
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      backgroundColor: '#f8f9fa',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px'
-    }}>
-      <div style={{
-        backgroundColor: 'white',
-        padding: '40px',
-        borderRadius: '12px',
-        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-        maxWidth: '600px',
-        width: '100%'
-      }}>
-        <h1 style={{
-          color: '#2c3e50',
-          fontSize: '32px',
-          marginBottom: '10px',
-          textAlign: 'center'
-        }}>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-5">
+      <div className="bg-white p-10 rounded-xl shadow-xl max-w-2xl w-full">
+        <h1 className="text-gray-800 text-4xl font-bold mb-3 text-center">
           Your Voter Guide
         </h1>
         
-        <p style={{
-          color: '#666',
-          fontSize: '16px',
-          textAlign: 'center',
-          marginBottom: '30px'
-        }}>
+        <p className="text-gray-600 text-lg text-center mb-8">
           Find candidates and understand ballot measures that align with your values
-
         </p>
 
         <form onSubmit={handleSubmit}>
           {/* State Selection */}
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{
-              display: 'block',
-              marginBottom: '8px',
-              fontWeight: 'bold',
-              color: '#2c3e50'
-            }}>
+          <div className="mb-6">
+            <label className="block mb-2 font-semibold text-gray-700">
               Select State:
             </label>
             <select
@@ -177,13 +146,7 @@ function ElectionSelector({ onElectionSelect }) {
                 setSelectedCounty('');
                 setSelectedOffice('');
               }}
-              style={{
-                width: '100%',
-                padding: '12px',
-                border: '2px solid #ddd',
-                borderRadius: '6px',
-                fontSize: '16px'
-              }}
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-lg bg-white hover:border-blue-500 focus:outline-none focus:border-blue-500 transition-colors"
             >
               <option value="">Choose a state...</option>
               {AVAILABLE_ELECTIONS.map(state => (
@@ -196,13 +159,8 @@ function ElectionSelector({ onElectionSelect }) {
 
           {/* County Selection */}
           {selectedState && (
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{
-                display: 'block',
-                marginBottom: '8px',
-                fontWeight: 'bold',
-                color: '#2c3e50'
-              }}>
+            <div className="mb-6">
+              <label className="block mb-2 font-semibold text-gray-700">
                 Select County:
               </label>
               <select
@@ -211,13 +169,7 @@ function ElectionSelector({ onElectionSelect }) {
                   setSelectedCounty(e.target.value);
                   setSelectedOffice('');
                 }}
-                style={{
-                  width: '100%',
-                  padding: '12px',
-                  border: '2px solid #ddd',
-                  borderRadius: '6px',
-                  fontSize: '16px'
-                }}
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-lg bg-white hover:border-blue-500 focus:outline-none focus:border-blue-500 transition-colors"
               >
                 <option value="">Choose a county...</option>
                 {selectedStateData?.counties.map(county => (
@@ -231,27 +183,17 @@ function ElectionSelector({ onElectionSelect }) {
 
           {/* Meeting Links */}
           {selectedCounty && COUNTY_MEETING_LINKS[selectedCounty] && (
-            <div style={{
-              marginBottom: '20px',
-              padding: '15px',
-              backgroundColor: '#e3f2fd',
-              borderRadius: '6px',
-              borderLeft: '4px solid #2196f3'
-            }}>
-              <p style={{ 
-                margin: '0 0 10px 0', 
-                color: '#555',
-                fontSize: '14px' 
-              }}>
+            <div className="mb-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+              <p className="mb-2 text-gray-700 text-sm">
                 Looking for meeting agendas and schedules?
               </p>
-              <strong style={{ color: '#1976d2', fontSize: '16px' }}>County Meeting Information:</strong>
-              <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <strong className="text-blue-700 text-base">County Meeting Information:</strong>
+              <div className="mt-3 flex flex-col gap-2">
                 <a 
                   href={COUNTY_MEETING_LINKS[selectedCounty].commission} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  style={{ color: '#1976d2', textDecoration: 'none' }}
+                  className="text-blue-600 hover:text-blue-800 hover:underline transition-colors"
                 >
                   → County Commission Meetings & Agendas
                 </a>
@@ -259,7 +201,7 @@ function ElectionSelector({ onElectionSelect }) {
                   href={COUNTY_MEETING_LINKS[selectedCounty].schoolBoard} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: '#1976d2', textDecoration: 'none' }}
+                  className="text-blue-600 hover:text-blue-800 hover:underline transition-colors"
                 >
                   → School Board Meetings & Agendas
                 </a>
@@ -269,25 +211,14 @@ function ElectionSelector({ onElectionSelect }) {
 
           {/* Office Selection */}
           {selectedCounty && (
-            <div style={{ marginBottom: '30px' }}>
-              <label style={{
-                display: 'block',
-                marginBottom: '8px',
-                fontWeight: 'bold',
-                color: '#2c3e50'
-              }}>
+            <div className="mb-8">
+              <label className="block mb-2 font-semibold text-gray-700">
                 Select Election Type:
               </label>
               <select
                 value={selectedOffice}
                 onChange={(e) => setSelectedOffice(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '12px',
-                  border: '2px solid #ddd',
-                  borderRadius: '6px',
-                  fontSize: '16px'
-                }}
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg text-lg bg-white hover:border-blue-500 focus:outline-none focus:border-blue-500 transition-colors"
               >
                 <option value="">Choose an election...</option>
                 {selectedCountyData?.offices.map(office => (
@@ -303,19 +234,7 @@ function ElectionSelector({ onElectionSelect }) {
           {selectedState && selectedCounty && selectedOffice && (
             <button
               type="submit"
-              style={{
-                width: '100%',
-                padding: '15px',
-                backgroundColor: '#3498db',
-                color: 'white',
-                border: 'none',
-                borderRadius: '6px',
-                fontSize: '18px',
-                fontWeight: 'bold',
-                cursor: 'pointer'
-              }}
-              onMouseOver={(e) => e.target.style.backgroundColor = '#2980b9'}
-              onMouseOut={(e) => e.target.style.backgroundColor = '#3498db'}
+              className="w-full py-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg text-lg font-bold cursor-pointer transition-colors shadow-lg hover:shadow-xl"
             >
               Start Candidate Matching
             </button>
@@ -323,14 +242,9 @@ function ElectionSelector({ onElectionSelect }) {
         </form>
 
         {/* Available Elections Info */}
-        <div style={{
-          marginTop: '40px',
-          padding: '20px',
-          backgroundColor: '#f8f9fa',
-          borderRadius: '6px'
-        }}>
-          <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Available Elections:</h3>
-          <ul style={{ color: '#666', lineHeight: '1.6' }}>
+        <div className="mt-10 p-5 bg-gray-50 rounded-lg">
+          <h3 className="text-gray-800 font-semibold text-lg mb-4">Available Elections:</h3>
+          <ul className="text-gray-600 leading-relaxed space-y-1">
             <li><strong>Hernando County:</strong> School Board, County Commission, City Council, Ballot Measures</li>
             <li><strong>Citrus County:</strong> School Board, County Commission, Ballot Measures</li>
             <li><strong>Hillsborough County:</strong> School Board, County Commission, Ballot Measures</li>
@@ -338,12 +252,7 @@ function ElectionSelector({ onElectionSelect }) {
             <li><strong>Pinellas County:</strong> School Board, County Commission, Ballot Measures</li>
             <li><strong>Pasco County:</strong> School Board, County Commission, Ballot Measures</li>
           </ul>
-          <p style={{ 
-            color: '#666', 
-            fontSize: '14px', 
-            marginTop: '15px',
-            fontStyle: 'italic'
-          }}>
+          <p className="text-gray-500 text-sm mt-4 italic">
             More counties and elections coming soon. Contact us to request coverage for your area.
           </p>
         </div>
