@@ -31,7 +31,7 @@ function Questionnaire({ questions, onComplete }) {
     <h3 className="text-2xl font-semibold text-white mb-6">{currentQuestion.text}</h3>
     
     {/* Container for the answer buttons */}
-    <div className="space-y-4">
+    <div className="flex flex-colspace-y-4">
       {currentQuestion.options.map(option => (
         <button
           key={option.value}
