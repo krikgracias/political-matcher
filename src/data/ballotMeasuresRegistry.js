@@ -37,9 +37,22 @@ export function getBallotMeasuresForLocation(county, state = 'florida') {
   return measures;
 }
 
+// OLD Helper function: Get only upcoming ballot measures
+// export function getUpcomingBallotMeasures(county, state = 'florida') {
+//   const today = new Date();
+//   return getBallotMeasuresForLocation(county, state)
+//     .filter(measure => {
+//       const electionDate = new Date(measure.electionDate);
+//       return electionDate >= today && measure.status === 'upcoming';
+//     })
+//     .sort((a, b) => new Date(a.electionDate) - new Date(b.electionDate));
+// }
+
 // Helper function: Get only upcoming ballot measures
 export function getUpcomingBallotMeasures(county, state = 'florida') {
   const today = new Date();
+  today.setHours(0, 0, 0, 0); // ✅ Set time to midnight
+
   return getBallotMeasuresForLocation(county, state)
     .filter(measure => {
       const electionDate = new Date(measure.electionDate);
