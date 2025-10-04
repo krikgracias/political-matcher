@@ -28,7 +28,10 @@ function App() {
   const handleOfficeSelect = (office: string, year?: string): void => {
     if (!selectedLocation) return;
     
-    console.log('handleOfficeSelect called with:', { office, year, selectedLocation });
+    console.log('=== handleOfficeSelect ===');
+    console.log('office:', office);
+    console.log('year:', year);
+    console.log('selectedLocation:', selectedLocation);
     
     // Build the election key
     let electionKey = `${selectedLocation.state}-${selectedLocation.county}-${office}`;
@@ -36,18 +39,25 @@ function App() {
       electionKey += `-${year}`;
     }
     
-    console.log('Looking for election key:', electionKey);
-    console.log('Available keys:', Object.keys(ELECTION_REGISTRY));
+    console.log('Built election key:', electionKey);
+    console.log('Registry keys available:', Object.keys(ELECTION_REGISTRY));
+    console.log('Does key exist in registry?', electionKey in ELECTION_REGISTRY);
     
     const config = ELECTION_REGISTRY[electionKey];
+    console.log('Retrieved config:', config);
+    
     if (config) {
-      console.log('Found config:', config);
-      console.log('Config type:', config.type, 'Config office:', config.office);
+      console.log('✅ Config found!');
+      console.log('Config details:', {
+        id: config.id,
+        office: config.office,
+        type: config.type,
+        title: config.title
+      });
       setElectionConfig(config);
     } else {
-      console.error('No config found for:', electionKey);
-      console.error('Tried to find:', electionKey);
-      console.error('Available keys:', Object.keys(ELECTION_REGISTRY).join(', '));
+      console.error('❌ No config found for:', electionKey);
+      console.error('Available keys:', Object.keys(ELECTION_REGISTRY));
     }
   };
   
@@ -101,7 +111,7 @@ function App() {
     
     if (isBallotMeasure) {
       console.log('Rendering BallotMeasureMatcher');
-      return <BallotMeasureMatcher config={electionConfig} onBack={handleBackFromElection} />;
+      return <BallotMeasureMatcher config={electionConfig} />;
     }
     console.log('Rendering ElectionMatcher');
     return <ElectionMatcher config={electionConfig} onBack={handleBackFromElection} />;
