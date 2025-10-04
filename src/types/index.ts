@@ -1,25 +1,37 @@
+// src/types/index.ts
+
+// Define a specific type for question options
+export interface QuestionOption {
+  value: string;
+  label: string;
+}
+
+// Update the main Question interface to be reusable
 export interface Question {
   id: string;
-  category: string;
   text: string;
-  options: any[];
-  order: number;
-  active: boolean;
+  options: QuestionOption[];
+  // These properties can be optional if not all questions use them
+  category?: string;
+  order?: number;
+  active?: boolean;
+  proVoteAnswer?: string; // For ballot measure logic
 }
 
 export interface Candidate {
-  id: string;
+  id:string;
   name: string;
   district: string;
   position: string;
-  term?: string;
   background: string;
+  positions: any; // Maps question IDs to answer values
+  // Optional properties
+  term?: string;
   photo?: string;
   website?: string;
   email?: string;
-  positions: any;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface ElectionConfig {
@@ -30,14 +42,14 @@ export interface ElectionConfig {
   title: string;
   description: string;
   electionDate: string;
-  questions: Question[];
+  questions: Question[]; // Uses the updated Question interface
   candidates: Candidate[];
 }
 
 export interface Argument {
   title: string;
   argument: string;
-  strength: 'high' | 'medium' | 'low'; // Use the specific union type here
+  strength: 'high' | 'medium' | 'low';
 }
 
 export interface BallotMeasureConfig {
@@ -46,10 +58,10 @@ export interface BallotMeasureConfig {
   shortTitle: string;
   summary: string;
   electionDate: string;
-  questions: any[]; 
+  questions: Question[]; // Now uses the updated Question interface
   requirements: { threshold: number };
   fiscalImpact?: { summary: string; details: string[] };
-  supportersArguments?: Argument[]; // Use the new Argument interface
-  opponentsArguments?: Argument[]; // Use the new Argument interface
+  supportersArguments?: Argument[];
+  opponentsArguments?: Argument[];
   results?: any;
 }
